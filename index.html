@@ -1,114 +1,235 @@
 <!DOCTYPE html>
 <html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Undangan Pernikahan Bayou & Rani</title>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Anybody Wedding</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Sacramento&family=Tangerine:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300..700;1,300..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sen:wght@400..800&display=swap"
+      rel="stylesheet"
+    />
 
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Sacramento&family=Tangerine:wght@400;700&display=swap"
-    rel="stylesheet" />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300..700;1,300..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sen:wght@400..800&display=swap"
-    rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
 
-  <!-- Link CSS -->
-  <link rel="stylesheet" href="style.css" />
-</head>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
 
-<body>
-  <section id="hiro" class="hiro">
-    <div class="hiro-container">
-      <h2>The Wedding</h2>
-      <h1>Bayou & Rani</h1>
-      <p>dua jiwa berbeda mengikat janji suci bersatu dalam cinta</p>
-      <h4>Kepada Yth. <br />Bapak/Ibu/Saudara/i</h4>
-      <a href="#main" class="btn">Buka Undangan</a>
-    </div>
-  </section>
-  <main id="main">
-    <div class="card-ayat">
-      <p>
-        "Dan di antara tanda-tanda kebesaran-Nya (Allah) ialah Dia menciptakan
-        pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung
-        dan merasa tentram kepadanya, dan Dia menjadikan di antaramu rasa
-        kasih dan sayang. Sungguh, pada yang demikian itu benar-benar terdapat
-        tanda-tanda (kebesaran) Allah bagi kaum yang berpikir."
-      </p>
-      <h5>QS Ar-Rum : 21</h5>
-    </div>
-    <div class="konten">
-      <div class="pembuka">
-        <h5>Assalamu'alaikum Warahmatullahi Wabarakatuh</h5>
-        <p>
-          Dengan memohon Rahmat dan Ridho Allah SWT kami bermaksud untuk
-          mengundang Bapak/Ibu/Saudara/i untuk menghadiri acara pernikahan kami:
-        </p>
+    <style>
+      html {
+        scroll-behavior: smooth;
+        overflow: hidden; /* Akan diaktifkan oleh JS saat tombol 'Buka Undangan' diklik */
+      }
+      body {
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <section id="hero" class="hero">
+      <div class="hero-container">
+        <h2>The Wedding of</h2>
+        <h1>Bayou & Rani</h1>
+        <p>dua jiwa berbeda mengikat janji suci bersatu dalam cinta</p>
+        <h4>Kepada Yth. <br />Bapak/Ibu/Saudara/i</h4>
+        <a href="#main-content" class="btn" id="open-invitation-btn"
+          >Buka Undangan</a
+        >
       </div>
-      <div class="nama">
-        <h3>Ahmad Bayou Damara, S.T.</h2>
-          <p>Putra Pertama dari <br>
-            Bapak H. Ahmad dan Ibu Hj. Siti</p>
-          <h2>&</h2>
-          <h3>drg. Silvia Rani Anggraini</h3>
-          <p>Putri Pertama dari <br>
-            Bapak H. Budi dan Ibu Hj. Ani</p>
-      </div>
-      <div class="acara">
-        <div class="akad">
-          <h4>AKAD NIKAH</h4>
+    </section>
+
+    <main id="main-content">
+      <section class="ayat-section">
+        <div class="card-ayat">
           <p>
-            <span>Hari/Tanggal :</span><br />
-            Sabtu, 25 November 2023<br />
-            <span>Waktu :</span><br />
-            Pukul 09.00 WIB<br />
-            <span>Tempat :</span><br />
-            Masjid Nasional Al-Akbar Surabaya, Jl. Pagesangan No. 1, Surabaya
+            "Dan di antara tanda-tanda kebesaran-Nya (Allah) ialah Dia
+            menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar
+            kamu cenderung dan merasa tentram kepadanya, dan Dia menjadikan di
+            antaramu rasa kasih dan sayang. Sungguh, pada yang demikian itu
+            benar-benar terdapat tanda-tanda (kebesaran) Allah bagi kaum yang
+            berpikir."
           </p>
-          <a href="https://maps.app.goo.gl/tjJqCvX2QzNzRWc1A" class="map">Lokasi Akad</a>
+          <h5>QS Ar-Rum : 21</h5>
         </div>
-        <div class="resepsi">
-          <h4>RESEPSI</h4>
-          <p>
-            <span>Hari/Tanggal :</span><br />
-            Sabtu, 25 November 2023<br />
-            <span>Waktu :</span><br />
-            Pukul 12.00 - 16.00 WIB<br />
-            <span>Tempat :</span><br />
-            Gedung Serbaguna Masjid Al-Akbar, Jl. Pagesangan No.1, Surabaya
-          </p>
-          <a href="https://maps.app.goo.gl/tjJqCvX2QzNzRWc1A" class="map">Lokasi Resepsi</a>
-        </div>
-      </div>
-    </div>
-    <div class="penutup">
-      <p>
-        Kami sangat berharap kehadiran Bapak/Ibu/Saudara/i untuk memberikan
-        doa restu kepada kami. Atas kehadiran dan doa restunya, kami ucapkan
-        terima kasih.
-      </p>
-      <h5>Wassalamu'alaikum Warahmatullahi Wabarakatuh</h5>
-    </div>
-    <div class="galeri">
-      <h2>Galeri</h2>
-      <div class="galeri-container">
-        <img src="image/hiroback.jpg" class="foto" alt="Galeri 1" />
-        <img src="image/hiroback.jpg" class="foto" alt="Galeri 2" />
-        <img src="image/hiroback.jpg" class="foto" alt="Galeri 3" />
-        <img src="image/hiroback.jpg" class="foto" alt="Galeri 4" />
-      </div>
-    </div>
-  </main>
-  <footer>
-    <div class="footer-container">
-      <p>&copy; 2023 Bayou & Rani Wedding. All rights reserved.</p>
-      <span>
-        Designed by <a href="https://instagram.com/alfir.card" target="_blank">AlFir-Card</a>
-      </span>
-</body>
+      </section>
 
+      <section class="info-section">
+        <div class="konten">
+          <div class="pembuka">
+            <h3>Assalamu'alaikum Warahmatullahi Wabarakatuh</h3>
+            <p>
+              Dengan memohon Rahmat dan Ridho Allah SWT kami bermaksud untuk
+              mengundang Bapak/Ibu/Saudara/i untuk menghadiri acara pernikahan
+              kami:
+            </p>
+          </div>
+          <div class="nama">
+            <h2>Ahmad Bayou Damara, S.T.</h2>
+            <p>
+              Putra Pertama dari <br />
+              Bapak H. Ahmad dan Ibu Hj. Siti
+            </p>
+            <span class="ampersand">&</span>
+            <h2>drg. Silvia Rani Anggraini</h2>
+            <p>
+              Putri Pertama dari <br />
+              Bapak H. Budi dan Ibu Hj. Ani
+            </p>
+          </div>
+          <div class="acara">
+            <div class="akad">
+              <h4>AKAD NIKAH</h4>
+              <p>
+                <span>Hari/Tanggal :</span><br />
+                Sabtu, 25 November 2023<br />
+                <span>Waktu :</span><br />
+                Pukul 09.00 WIB<br />
+                <span>Tempat :</span><br />
+                Masjid Nasional Al-Akbar Surabaya, Jl. Pagesangan No. 1,
+                Surabaya
+              </p>
+              <a
+                href="https://maps.app.goo.gl/tjJqCvX2QzNzRWc1A"
+                target="_blank"
+                class="map"
+                >Lokasi Akad</a
+              >
+            </div>
+            <div class="resepsi">
+              <h4>RESEPSI</h4>
+              <p>
+                <span>Hari/Tanggal :</span><br />
+                Sabtu, 25 November 2023<br />
+                <span>Waktu :</span><br />
+                Pukul 12.00 - 16.00 WIB<br />
+                <span>Tempat :</span><br />
+                Gedung Serbaguna Masjid Al-Akbar, Jl. Pagesangan No.1, Surabaya
+              </p>
+              <a
+                href="https://maps.app.goo.gl/tjJqCvX2QzNzRWc1A"
+                target="_blank"
+                class="map"
+                >Lokasi Resepsi</a
+              >
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="closing-section">
+        <div class="penutup">
+          <p>
+            Kami sangat berharap kehadiran Bapak/Ibu/Saudara/i untuk memberikan
+            doa restu kepada kami. Atas kehadiran dan doa restunya, kami ucapkan
+            terima kasih.
+          </p>
+          <h5>Wassalamu'alaikum Warahmatullahi Wabarakatuh</h5>
+        </div>
+      </section>
+
+      <section class="gallery-section">
+        <div class="galeri">
+          <h2>Galeri</h2>
+          <div class="galeri-container">
+            <img
+              src="image/hiroback.jpg"
+              class="foto"
+              alt="Galeri 1"
+              data-aos="fade-up"
+              data-aos-duration="1000"
+            />
+            <img
+              src="image/hiroback.jpg"
+              class="foto"
+              alt="Galeri 2"
+              data-aos="fade-up"
+              data-aos-duration="1000"
+              data-aos-delay="100"
+            />
+            <img
+              src="image/hiroback.jpg"
+              class="foto"
+              alt="Galeri 3"
+              data-aos="fade-up"
+              data-aos-duration="1000"
+              data-aos-delay="200"
+            />
+            <img
+              src="image/hiroback.jpg"
+              class="foto"
+              alt="Galeri 4"
+              data-aos="fade-up"
+              data-aos-duration="1000"
+              data-aos-delay="300"
+            />
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-container">
+        <p>© 2023 Bayou & Rani Wedding. All rights reserved.</p>
+        <span>
+          Designed by
+          <a href="https://instagram.com/alfir.card" target="_blank"
+            >AlFir-Card</a
+          >
+        </span>
+      </div>
+    </footer>
+
+    <audio id="background-music" loop>
+      <source src="musik/backsound.mp3" type="audio/mpeg" />
+      Your browser does not support the audio element.
+    </audio>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const openBtn = document.getElementById("open-invitation-btn");
+        const bgMusic = document.getElementById("background-music");
+        const htmlElement = document.documentElement; // Mengacu pada tag <html>
+
+        // Fungsi untuk mengaktifkan scroll-behavior dan memutar musik
+        function activateContent() {
+          htmlElement.style.overflow = "auto"; // Mengaktifkan scroll
+          if (bgMusic) {
+            // Coba putar musik, tangani jika gagal (misal diblokir browser)
+            bgMusic
+              .play()
+              .catch((e) => console.error("Error playing music:", e));
+          }
+          // Hapus event listener setelah diklik agar tidak berulang
+          openBtn.removeEventListener("click", activateContent);
+
+          // Inisialisasi AOS setelah konten bisa di-scroll
+          AOS.init({
+            // Opsional: konfigurasi global AOS
+            duration: 1000, // durasi default animasi
+            once: true, // animasi hanya terjadi sekali saat elemen masuk viewport
+          });
+        }
+
+        // Tambahkan event listener ke tombol
+        if (openBtn) {
+          openBtn.addEventListener("click", function (event) {
+            event.preventDefault(); // Mencegah perilaku default link (langsung lompat)
+            activateContent();
+            // Lakukan smooth scroll secara manual setelah musik diaktifkan
+            document
+              .getElementById("main-content")
+              .scrollIntoView({ behavior: "smooth" });
+          });
+        }
+      });
+    </script>
+  </body>
 </html>
