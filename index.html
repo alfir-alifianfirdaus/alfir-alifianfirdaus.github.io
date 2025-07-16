@@ -16,13 +16,13 @@
       rel="stylesheet"
     />
 
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style1.css" />
 
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
 
     <style>
       html {
-        scroll-behavior: smooth;
+        /* scroll-behavior: smooth; <-- Ini akan kita kelola dengan JS */
         overflow: hidden; /* Akan diaktifkan oleh JS saat tombol 'Buka Undangan' diklik */
       }
       body {
@@ -98,7 +98,7 @@
               <a
                 href="https://maps.app.goo.gl/tjJqCvX2QzNzRWc1A"
                 target="_blank"
-                class="map"
+                class="map external-link"
                 >Lokasi Akad</a
               >
             </div>
@@ -115,7 +115,7 @@
               <a
                 href="https://maps.app.goo.gl/tjJqCvX2QzNzRWc1A"
                 target="_blank"
-                class="map"
+                class="map external-link"
                 >Lokasi Resepsi</a
               >
             </div>
@@ -179,7 +179,10 @@
         <p>© 2023 Bayou & Rani Wedding. All rights reserved.</p>
         <span>
           Designed by
-          <a href="https://instagram.com/alfir.card" target="_blank"
+          <a
+            href="https://instagram.com/alfir.card"
+            target="_blank"
+            class="external-link"
             >AlFir-Card</a
           >
         </span>
@@ -197,38 +200,96 @@
         const openBtn = document.getElementById("open-invitation-btn");
         const bgMusic = document.getElementById("background-music");
         const htmlElement = document.documentElement; // Mengacu pada tag <html>
+        let isMusicPlayingInitiated = false; // Flag untuk melacak apakah musik pernah diputar oleh pengguna
 
-        // Fungsi untuk mengaktifkan scroll-behavior dan memutar musik
-        function activateContent() {
+        // Fungsi untuk melakukan smooth scroll secara kustom
+        function customSmoothScroll(targetId, duration) {
+          const targetElement = document.getElementById(targetId);
+          if (!targetElement) return;
+
+          const startPosition = window.pageYOffset;
+          const targetPosition =
+            targetElement.getBoundingClientRect().top + window.pageYOffset;
+          const distance = targetPosition - startPosition;
+          let startTime = null;
+
+          function animation(currentTime) {
+            if (startTime === null) startTime = currentTime;
+            const timeElapsed = currentTime - startTime;
+            const run = easeInOutQuad(
+              timeElapsed,
+              startPosition,
+              distance,
+              duration
+            );
+            window.scrollTo(0, run);
+            if (timeElapsed < duration) requestAnimationFrame(animation);
+          }
+
+          // Fungsi easing (membuat animasi lebih halus dari linear)
+          function easeInOutQuad(t, b, c, d) {
+            t /= d / 2;
+            if (t < 1) return (c / 2) * t * t + b;
+            t--;
+            return (-c / 2) * (t * (t - 2) - 1) + b;
+          }
+
+          requestAnimationFrame(animation);
+        }
+
+        // Fungsi yang dipanggil saat tombol "Buka Undangan" diklik
+        function activateContentAndScroll() {
           htmlElement.style.overflow = "auto"; // Mengaktifkan scroll
           if (bgMusic) {
-            // Coba putar musik, tangani jika gagal (misal diblokir browser)
             bgMusic
               .play()
+              .then(() => {
+                isMusicPlayingInitiated = true; // Musik berhasil diputar
+              })
               .catch((e) => console.error("Error playing music:", e));
           }
-          // Hapus event listener setelah diklik agar tidak berulang
-          openBtn.removeEventListener("click", activateContent);
+          openBtn.removeEventListener("click", activateContentAndScroll);
 
-          // Inisialisasi AOS setelah konten bisa di-scroll
+          // Panggil custom smooth scroll
+          customSmoothScroll("main-content", 1500); // 1500ms = 1.5 detik
+
           AOS.init({
-            // Opsional: konfigurasi global AOS
-            duration: 1000, // durasi default animasi
-            once: true, // animasi hanya terjadi sekali saat elemen masuk viewport
+            duration: 1000,
+            once: true,
           });
         }
 
-        // Tambahkan event listener ke tombol
+        // Tambahkan event listener ke tombol "Buka Undangan"
         if (openBtn) {
           openBtn.addEventListener("click", function (event) {
-            event.preventDefault(); // Mencegah perilaku default link (langsung lompat)
-            activateContent();
-            // Lakukan smooth scroll secara manual setelah musik diaktifkan
-            document
-              .getElementById("main-content")
-              .scrollIntoView({ behavior: "smooth" });
+            event.preventDefault();
+            activateContentAndScroll(); // Panggil fungsi baru ini
           });
         }
+
+        // --- Bagian Perbaikan: Mengelola Musik berdasarkan Visibilitas Tab (tetap sama) ---
+        document.addEventListener("visibilitychange", function () {
+          if (bgMusic && isMusicPlayingInitiated) {
+            if (document.hidden) {
+              bgMusic.pause();
+            } else {
+              bgMusic
+                .play()
+                .catch((e) => console.error("Error resuming music:", e));
+            }
+          }
+        });
+
+        // --- Bagian untuk Menghentikan Musik saat Link Eksternal Diklik (tetap sama) ---
+        const externalLinks = document.querySelectorAll('a[target="_blank"]');
+
+        externalLinks.forEach((link) => {
+          link.addEventListener("click", function () {
+            if (bgMusic && !bgMusic.paused) {
+              bgMusic.pause();
+            }
+          });
+        });
       });
     </script>
   </body>

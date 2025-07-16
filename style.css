@@ -103,12 +103,21 @@ body {
   transition: all 0.3s ease-in-out;
   display: inline-block; /* Agar padding bekerja sempurna */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Tambah shadow */
+  cursor: pointer; /* Menunjukkan bahwa ini bisa diklik */
 }
 
 .hero-container .btn:hover {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* Efek shadow saat hover */
   transform: translateY(-2px); /* Efek angkat sedikit */
 }
+/* --- Perbaikan: Efek Tombol Saat Diklik --- */
+.hero-container .btn:active {
+  transform: translateY(-1px) scale(0.98); /* Sedikit turun dan mengecil */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4); /* Bayangan lebih tipis saat ditekan */
+  opacity: 0.9; /* Sedikit memudar */
+  transition: all 0.1s ease-in-out; /* Transisi lebih cepat untuk efek "klik" */
+}
+/* --- Akhir Perbaikan Tombol --- */
 
 /* Main Content Wrapper */
 main {
@@ -175,11 +184,12 @@ main {
 
 .nama h2 {
   font-family: "Tangerine", cursive;
-  font-size: 3rem; /* Ukuran nama pengantin */
+  font-size: 2rem; /* Ukuran nama pengantin */
   color: var(--warna4);
   text-shadow: 1px 1px 2px var(--warna1);
   font-weight: normal; /* Biarkan normal, Tangerine sudah tebal */
   line-height: 1.2;
+  word-wrap: break-word; /* Tambahkan ini untuk mencegah teks meluber */
 }
 
 .nama p {
@@ -261,12 +271,21 @@ main {
   font-family: "Cormorant", serif;
   font-size: 0.95rem;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  cursor: pointer; /* Menunjukkan bahwa ini bisa diklik */
 }
 
 .acara .map:hover {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   transform: translateY(-2px);
 }
+/* --- Perbaikan: Efek Tombol Map Saat Diklik --- */
+.acara .map:active {
+  transform: translateY(-1px) scale(0.98); /* Sedikit turun dan mengecil */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4); /* Bayangan lebih tipis saat ditekan */
+  opacity: 0.9; /* Sedikit memudar */
+  transition: all 0.1s ease-in-out; /* Transisi lebih cepat untuk efek "klik" */
+}
+/* --- Akhir Perbaikan Tombol Map --- */
 
 .penutup {
   font-family: "Playfair Display", serif;
@@ -375,7 +394,7 @@ footer a:hover {
   }
 
   .nama h2 {
-    font-size: 2.5rem; /* Ukuran nama pengantin di mobile */
+    font-size: 2rem; /* Ukuran nama pengantin di mobile */
   }
 
   .nama .ampersand {
@@ -437,7 +456,8 @@ footer a:hover {
   }
 
   .nama h2 {
-    font-size: 2.2rem;
+    font-size: 2rem; /* Mengurangi ukuran font lebih lanjut */
+    line-height: 1.1; /* Mengurangi line-height sedikit */
   }
 
   .nama .ampersand {
