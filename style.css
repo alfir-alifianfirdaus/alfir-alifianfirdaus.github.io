@@ -23,7 +23,7 @@ body {
 /* Hero Section */
 .hero {
   width: 100%;
-  min-height: 100dvh;
+  min-height: 100dvh; /* Menggunakan 100dvh untuk viewport height dinamis */
   padding: 20px; /* Tambah padding sedikit untuk konten */
   margin: auto;
   text-align: center;
@@ -122,7 +122,7 @@ body {
 /* Main Content Wrapper */
 main {
   width: 100%;
-  min-height: 100vh; /* Agar main selalu memenuhi viewport */
+  min-height: 100svh; /* Menggunakan 100svh untuk viewport height dinamis */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -140,7 +140,6 @@ main {
 .closing-section,
 .gallery-section,
 .comments-section {
-  /* Tambahkan .comments-section di sini agar memiliki styling kartu yang sama */
   width: 90%;
   max-width: 800px; /* Batasi lebar maksimum untuk readability */
   margin-top: 30px; /* Jarak antar section */
@@ -322,7 +321,7 @@ main {
 
 .galeri-container .foto {
   width: 100%;
-  height: 150px; /* Tinggi tetap untuk mobile, sesuaikan jika perlu */
+  aspect-ratio: 16 / 9; /* Menjaga rasio aspek gambar */
   object-fit: cover;
   border-radius: 10px;
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
@@ -340,7 +339,7 @@ main {
   background-color: var(--warna2); /* Atau warna latar belakang yang sesuai */
   padding: 60px 20px;
   text-align: center;
-  position: relative; /* Untuk posisi pseudo-element jika ada */
+  position: relative;
   overflow: hidden;
 }
 
@@ -365,7 +364,7 @@ main {
 }
 
 /* Disqus akan mengatur styling elemen-elemen di dalamnya.
-   Anda bisa mengatur tema (light/dark) Disqus dari panel admin mereka.
+    Anda bisa mengatur tema (light/dark) Disqus dari panel admin mereka.
 */
 
 /* --- AKHIR BAGIAN BARU: Komentar Section Styling --- */
@@ -412,15 +411,14 @@ footer a:hover {
   .closing-section,
   .gallery-section,
   .comments-section {
-    /* Tambahkan .comments-section di sini */
     width: 95%; /* Lebih lebar di mobile */
     padding: 20px 20px;
     border-radius: 30px; /* Sedikit kurang bulat */
   }
 
   .card-ayat p,
-  .penutup p {
-    /* Tambahkan .comments-section p */
+  .penutup p,
+  .comments-section p {
     font-size: 0.85rem;
   }
 
@@ -459,8 +457,8 @@ footer a:hover {
     font-size: 0.85rem;
   }
 
-  .galeri h2 {
-    /* Tambahkan .comments-section h2 */
+  .galeri h2,
+  .comments-section h2 {
     font-size: 1.6rem;
   }
 
@@ -469,17 +467,11 @@ footer a:hover {
   }
 
   .galeri-container .foto {
-    height: 200px;
+    height: auto; /* Biarkan tinggi menyesuaikan rasio aspek */
   }
 
   .comments-section {
     padding: 40px 15px;
-  }
-  .comments-section h2 {
-    font-size: 1.6rem;
-  }
-  .comments-section p {
-    font-size: 0.85rem;
   }
 }
 
@@ -503,7 +495,6 @@ footer a:hover {
   .penutup,
   .galeri,
   .comments-section {
-    /* Tambahkan .comments-section di sini */
     padding: 15px 15px;
     border-radius: 20px;
   }
@@ -518,11 +509,6 @@ footer a:hover {
   }
 
   .galeri-container .foto {
-    height: 180px;
+    height: auto; /* Biarkan tinggi menyesuaikan rasio aspek */
   }
-
-  /* Ini tidak lagi relevan karena kita tidak menggunakan iframe Google Forms */
-  /* .comments-section iframe {
-    height: 450px;
-  } */
 }
