@@ -337,7 +337,6 @@ main {
 /* --- BAGIAN BARU: Styling untuk Ucapan & Doa (Google Form & Komentar) --- */
 .comments-section {
   padding: 40px 30px; /* Padding section */
-  /* Pastikan max-width dan margin dari .card-styles berlaku */
 }
 
 .comments-section .comments-container {
@@ -403,7 +402,7 @@ main {
 /* Styling untuk Daftar Komentar */
 #comments-list {
   display: grid;
-  grid-template-columns: 1fr; /* Selalu satu kolom */
+  grid-template-columns: 1fr; /* Satu kolom default */
   gap: 20px; /* Jarak antar komentar */
   text-align: left; /* Teks di dalam komentar ke kiri */
   padding: 15px; /* Padding di sekitar daftar komentar */
@@ -414,15 +413,17 @@ main {
 
 /* Styling untuk Setiap Komentar Individu */
 .single-comment {
-  background: var(--warna3); /* Warna latar belakang komentar */
-  border: 1px solid rgba(0, 0, 0, 0.1); /* Border halus */
+  background: rgba(
+    255,
+    255,
+    255,
+    0.9
+  ); /* Latar belakang setiap kartu komentar */
+  border: 1px solid var(--warna3); /* Border halus */
   border-radius: 12px;
   padding: 20px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-  display: flex; /* Gunakan flexbox untuk tata letak internal */
-  flex-direction: column; /* Konten disusun vertikal */
-  justify-content: space-between; /* Untuk mendorong tanggal ke bawah */
 }
 
 .single-comment:hover {
@@ -434,27 +435,23 @@ main {
   font-family: "Cormorant", serif;
   font-size: 1.15rem;
   font-weight: 700;
-  color: var(--warna4); /* Warna nama */
-  margin-bottom: 8px; /* Jarak dari nama ke teks komentar */
-  word-wrap: break-word; /* Memastikan nama panjang tidak meluber */
+  color: var(--warna1); /* Warna nama */
+  margin-bottom: 8px;
 }
 
 .comment-text {
   font-family: "Poppins", sans-serif;
   font-size: 0.95rem;
   color: var(--warna4);
-  margin-bottom: 15px; /* Jarak dari teks komentar ke tanggal */
+  margin-bottom: 10px;
   line-height: 1.6;
-  word-wrap: break-word; /* Memastikan teks komentar panjang tidak meluber */
-  flex-grow: 1; /* Agar teks komentar mengisi ruang sisa */
 }
 
 .comment-date {
   font-family: "Poppins", sans-serif;
-  font-size: 0.75rem; /* Sedikit lebih kecil agar tidak mendominasi */
-  color: var(--warna4); /* Warna abu-abu untuk tanggal */
+  font-size: 0.8rem;
+  color: #888; /* Warna abu-abu untuk tanggal */
   text-align: right; /* Tanggal di pojok kanan bawah */
-  opacity: 0.8; /* Sedikit transparan */
 }
 
 /* --- AKHIR BAGIAN BARU: Styling untuk Ucapan & Doa --- */
@@ -483,10 +480,85 @@ footer a:hover {
 
 /* For screens smaller than 768px (e.g., tablets and mobile) */
 @media (max-width: 768px) {
-  /* ... (Pertahankan semua media queries yang sudah ada untuk section lain) ... */
+  .hero-container h1 {
+    font-size: 3.5rem; /* Lebih kecil di mobile */
+  }
+
+  .hero-container p {
+    font-size: 0.8rem;
+  }
+
+  .hero-container .btn {
+    padding: 6px 30px;
+    font-size: 0.9rem;
+  }
+
+  .ayat-section,
+  .info-section,
+  .closing-section,
+  .gallery-section,
+  .comments-section {
+    width: 95%; /* Lebih lebar di mobile */
+    padding: 20px 20px;
+    border-radius: 30px; /* Sedikit kurang bulat */
+  }
+
+  .card-ayat p,
+  .penutup p,
+  .comments-section p {
+    font-size: 0.85rem;
+  }
+
+  .card-ayat h5,
+  .penutup h5 {
+    font-size: 1.1rem;
+  }
+
+  .pembuka h3 {
+    font-size: 1.1rem;
+  }
+
+  .nama h2 {
+    font-size: 2rem; /* Ukuran nama pengantin di mobile */
+  }
+
+  .nama .ampersand {
+    font-size: 3.5rem;
+  }
+
+  .acara {
+    grid-template-columns: 1fr; /* Satu kolom untuk mobile */
+    gap: 15px; /* Jarak antar bagian acara */
+  }
+
+  .acara h4 {
+    font-size: 1rem;
+  }
+
+  .acara p {
+    font-size: 0.85rem;
+  }
+
+  .acara .map {
+    padding: 7px 12px;
+    font-size: 0.85rem;
+  }
+
+  .galeri h2,
+  .comments-section h2 {
+    font-size: 1.6rem;
+  }
+
+  .galeri-container {
+    grid-template-columns: 1fr; /* Satu kolom untuk galeri di mobile */
+  }
+
+  .galeri-container .foto {
+    height: auto; /* Biarkan tinggi menyesuaikan rasio aspek */
+  }
 
   .comments-section {
-    padding: 30px 20px; /* Sesuaikan padding untuk mobile */
+    padding: 40px 15px;
   }
 
   .comments-section h2 {
@@ -497,29 +569,58 @@ footer a:hover {
     font-size: 1.4rem;
   }
 
-  .comments-section p {
-    font-size: 0.9rem;
+  .google-form-container iframe {
+    min-height: 400px; /* Tinggi minimum iframe di mobile */
   }
 
   .comment-author {
-    font-size: 1.05rem; /* Sesuaikan ukuran font nama di mobile */
+    font-size: 1.1rem;
   }
 
   .comment-text {
-    font-size: 0.9rem; /* Sesuaikan ukuran font teks di mobile */
+    font-size: 0.9rem;
   }
 
   .comment-date {
-    font-size: 0.7rem; /* Sesuaikan ukuran font tanggal di mobile */
+    font-size: 0.75rem;
   }
 }
 
 /* For screens smaller than 480px (very small mobile) */
 @media (max-width: 480px) {
-  /* ... (Pertahankan semua media queries yang sudah ada untuk section lain) ... */
+  .hero-container h1 {
+    font-size: 3rem;
+  }
 
+  .hero-container p {
+    font-size: 0.75rem;
+    padding: 0 15px 1rem;
+  }
+
+  .hero-container h4 {
+    font-size: 0.9rem;
+  }
+
+  .card-ayat,
+  .konten,
+  .penutup,
+  .galeri,
   .comments-section {
-    padding: 20px 15px; /* Padding lebih kecil lagi untuk mobile sangat kecil */
+    padding: 15px 15px;
+    border-radius: 20px;
+  }
+
+  .nama h2 {
+    font-size: 2rem; /* Mengurangi ukuran font lebih lanjut */
+    line-height: 1.1; /* Mengurangi line-height sedikit */
+  }
+
+  .nama .ampersand {
+    font-size: 3rem;
+  }
+
+  .galeri-container .foto {
+    height: auto; /* Biarkan tinggi menyesuaikan rasio aspek */
   }
 
   .comments-section h2 {
@@ -530,15 +631,7 @@ footer a:hover {
     font-size: 1.2rem;
   }
 
-  .comment-author {
-    font-size: 1rem;
-  }
-
-  .comment-text {
-    font-size: 0.85rem;
-  }
-
-  .comment-date {
-    font-size: 0.65rem;
+  .google-form-container iframe {
+    min-height: 350px; /* Tinggi minimum iframe di mobile kecil */
   }
 }
