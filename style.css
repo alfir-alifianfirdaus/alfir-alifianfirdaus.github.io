@@ -138,7 +138,9 @@ main {
 .ayat-section,
 .info-section,
 .closing-section,
-.gallery-section {
+.gallery-section,
+.comments-section {
+  /* Tambahkan .comments-section di sini agar memiliki styling kartu yang sama */
   width: 90%;
   max-width: 800px; /* Batasi lebar maksimum untuk readability */
   margin-top: 30px; /* Jarak antar section */
@@ -333,6 +335,41 @@ main {
   z-index: 1; /* Pastikan gambar yang dihover di atas */
 }
 
+/* --- BAGIAN REVISI: Komentar Section Styling untuk Disqus --- */
+.comments-section {
+  background-color: var(--warna2); /* Atau warna latar belakang yang sesuai */
+  padding: 60px 20px;
+  text-align: center;
+  position: relative; /* Untuk posisi pseudo-element jika ada */
+  overflow: hidden;
+}
+
+.comments-section .comments-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0; /* Pastikan tidak ada padding internal tambahan yang mengganggu Disqus */
+}
+
+.comments-section h2 {
+  font-family: "Cormorant", serif;
+  font-size: 1.8rem;
+  padding-bottom: 10px;
+  color: var(--warna4);
+}
+
+.comments-section p {
+  font-family: "Poppins", sans-serif;
+  font-size: 0.95rem;
+  margin-bottom: 20px; /* Jarak antara paragraf dan modul Disqus */
+  color: var(--warna4);
+}
+
+/* Disqus akan mengatur styling elemen-elemen di dalamnya.
+   Anda bisa mengatur tema (light/dark) Disqus dari panel admin mereka.
+*/
+
+/* --- AKHIR BAGIAN BARU: Komentar Section Styling --- */
+
 /* Footer */
 footer {
   width: 100%;
@@ -373,7 +410,9 @@ footer a:hover {
   .ayat-section,
   .info-section,
   .closing-section,
-  .gallery-section {
+  .gallery-section,
+  .comments-section {
+    /* Tambahkan .comments-section di sini */
     width: 95%; /* Lebih lebar di mobile */
     padding: 20px 20px;
     border-radius: 30px; /* Sedikit kurang bulat */
@@ -381,6 +420,7 @@ footer a:hover {
 
   .card-ayat p,
   .penutup p {
+    /* Tambahkan .comments-section p */
     font-size: 0.85rem;
   }
 
@@ -420,6 +460,7 @@ footer a:hover {
   }
 
   .galeri h2 {
+    /* Tambahkan .comments-section h2 */
     font-size: 1.6rem;
   }
 
@@ -428,7 +469,17 @@ footer a:hover {
   }
 
   .galeri-container .foto {
-    height: 200px; /* Tinggi gambar di mobile */
+    height: 200px;
+  }
+
+  .comments-section {
+    padding: 40px 15px;
+  }
+  .comments-section h2 {
+    font-size: 1.6rem;
+  }
+  .comments-section p {
+    font-size: 0.85rem;
   }
 }
 
@@ -450,7 +501,9 @@ footer a:hover {
   .card-ayat,
   .konten,
   .penutup,
-  .galeri {
+  .galeri,
+  .comments-section {
+    /* Tambahkan .comments-section di sini */
     padding: 15px 15px;
     border-radius: 20px;
   }
@@ -467,4 +520,9 @@ footer a:hover {
   .galeri-container .foto {
     height: 180px;
   }
+
+  /* Ini tidak lagi relevan karena kita tidak menggunakan iframe Google Forms */
+  /* .comments-section iframe {
+    height: 450px;
+  } */
 }

@@ -5,24 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Undangan Pernikahan Bayou & Rani</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Sacramento&family=Tangerine:wght@400;700&display=swap"
+      rel="preconnect"
+      href="[https://fonts.googleapis.com](https://fonts.googleapis.com)"
+    />
+    <link
+      rel="preconnect"
+      href="[https://fonts.gstatic.com](https://fonts.gstatic.com)"
+      crossorigin
+    />
+    <link
+      href="[https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Sacramento&family=Tangerine:wght@400;700&display=swap](https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Sacramento&family=Tangerine:wght@400;700&display=swap)"
       rel="stylesheet"
     />
     <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300..700;1,300..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sen:wght@400..800&display=swap"
+      href="[https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300..700;1,300..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sen:wght@400..800&display=swap](https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300..700;1,300..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sen:wght@400..800&display=swap)"
       rel="stylesheet"
     />
 
     <link rel="stylesheet" href="style.css" />
 
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link
+      href="[https://unpkg.com/aos@2.3.1/dist/aos.css](https://unpkg.com/aos@2.3.1/dist/aos.css)"
+      rel="stylesheet"
+    />
 
     <style>
       html {
-        /* scroll-behavior: smooth; <-- Ini akan kita kelola dengan JS */
         overflow: hidden; /* Akan diaktifkan oleh JS saat tombol 'Buka Undangan' diklik */
       }
       body {
@@ -96,7 +105,7 @@
                 Surabaya
               </p>
               <a
-                href="https://maps.app.goo.gl/tjJqCvX2QzNzRWc1A"
+                href="[https://maps.app.goo.gl/tjJqCvX2QzNzRWc1A](https://maps.app.goo.gl/tjJqCvX2QzNzRWc1A)"
                 target="_blank"
                 class="map external-link"
                 >Lokasi Akad</a
@@ -113,7 +122,7 @@
                 Gedung Serbaguna Masjid Al-Akbar, Jl. Pagesangan No.1, Surabaya
               </p>
               <a
-                href="https://maps.app.goo.gl/tjJqCvX2QzNzRWc1A"
+                href="[https://maps.app.goo.gl/tjJqCvX2QzNzRWc1A](https://maps.app.goo.gl/tjJqCvX2QzNzRWc1A)"
                 target="_blank"
                 class="map external-link"
                 >Lokasi Resepsi</a
@@ -172,6 +181,47 @@
           </div>
         </div>
       </section>
+
+      <section class="comments-section">
+        <div class="comments-container">
+          <h2>Ucapan & Doa</h2>
+          <p>
+            Tinggalkan ucapan dan doa terbaik Anda untuk kami di kolom komentar
+            di bawah ini.
+          </p>
+
+          <div id="disqus_thread"></div>
+          <script>
+            /**
+             * Konfigurasi Disqus (opsional tapi direkomendasikan)
+             * Variabel-variabel ini membantu Disqus melacak komentar dengan benar.
+             * Uncoment dan GANTI NILAI placeholder.
+             */
+            /*
+            var disqus_config = function () {
+            this.page.url = '[https://undangan-bayou-rani.vercel.app/](https://undangan-bayou-rani.vercel.app/)'; // GANTI DENGAN URL LENGKAP UNDANGAN ANDA
+            this.page.identifier = 'undangan-bayou-rani-homepage'; // GANTI DENGAN ID UNIK UNTUK HALAMAN INI
+            };
+            */
+            (function () {
+              // JANGAN EDIT BARIS DI BAWAH INI
+              var d = document,
+                s = d.createElement("script");
+              s.src =
+                "https://**GANTI_DENGAN_DISQUS_SHORTNAME_ANDA**[.disqus.com/embed.js](https://.disqus.com/embed.js)"; // <-- PENTING: GANTI DENGAN SHORTNAME DISQUS ANDA!
+              s.setAttribute("data-timestamp", +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          </script>
+          <noscript
+            >Please enable JavaScript to view the
+            <a
+              href="[https://disqus.com/?ref_noscript](https://disqus.com/?ref_noscript)"
+              >comments powered by Disqus.</a
+            ></noscript
+          >
+        </div>
+      </section>
     </main>
 
     <footer>
@@ -180,7 +230,7 @@
         <span>
           Designed by
           <a
-            href="https://instagram.com/alfir.card"
+            href="[https://instagram.com/alfir.card](https://instagram.com/alfir.card)"
             target="_blank"
             class="external-link"
             >AlFir-Card</a
@@ -194,7 +244,7 @@
       Your browser does not support the audio element.
     </audio>
 
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="[https://unpkg.com/aos@2.3.1/dist/aos.js](https://unpkg.com/aos@2.3.1/dist/aos.js)"></script>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         const openBtn = document.getElementById("open-invitation-btn");
@@ -267,7 +317,7 @@
           });
         }
 
-        // --- Bagian Perbaikan: Mengelola Musik berdasarkan Visibilitas Tab (tetap sama) ---
+        // --- Bagian Mengelola Musik berdasarkan Visibilitas Tab ---
         document.addEventListener("visibilitychange", function () {
           if (bgMusic && isMusicPlayingInitiated) {
             if (document.hidden) {
@@ -280,7 +330,7 @@
           }
         });
 
-        // --- Bagian untuk Menghentikan Musik saat Link Eksternal Diklik (tetap sama) ---
+        // --- Bagian untuk Menghentikan Musik saat Link Eksternal Diklik ---
         const externalLinks = document.querySelectorAll('a[target="_blank"]');
 
         externalLinks.forEach((link) => {
