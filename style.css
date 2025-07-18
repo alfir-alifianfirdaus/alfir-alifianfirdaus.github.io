@@ -334,40 +334,127 @@ main {
   z-index: 1; /* Pastikan gambar yang dihover di atas */
 }
 
-/* --- BAGIAN REVISI: Komentar Section Styling untuk Disqus --- */
+/* --- BAGIAN BARU: Styling untuk Ucapan & Doa (Google Form & Komentar) --- */
 .comments-section {
-  background-color: var(--warna2); /* Atau warna latar belakang yang sesuai */
-  padding: 60px 20px;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
+  padding: 40px 30px; /* Padding section */
 }
 
 .comments-section .comments-container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 0; /* Pastikan tidak ada padding internal tambahan yang mengganggu Disqus */
+  /* Inherit max-width dan margin dari .comments-section */
+  padding: 0;
+  text-align: center;
 }
 
 .comments-section h2 {
   font-family: "Cormorant", serif;
-  font-size: 1.8rem;
-  padding-bottom: 10px;
+  font-size: 2.2rem; /* Ukuran lebih besar untuk judul utama */
+  margin-bottom: 10px;
+  color: var(--warna4);
+}
+
+.comments-section h3 {
+  font-family: "Playfair Display", serif;
+  font-size: 1.6rem; /* Ukuran lebih besar untuk sub-judul */
+  margin-top: 40px; /* Jarak dari form ke daftar komentar */
+  margin-bottom: 15px;
   color: var(--warna4);
 }
 
 .comments-section p {
   font-family: "Poppins", sans-serif;
   font-size: 0.95rem;
-  margin-bottom: 20px; /* Jarak antara paragraf dan modul Disqus */
+  margin-bottom: 25px; /* Jarak dari paragraf ke form */
   color: var(--warna4);
+  line-height: 1.5;
 }
 
-/* Disqus akan mengatur styling elemen-elemen di dalamnya.
-    Anda bisa mengatur tema (light/dark) Disqus dari panel admin mereka.
-*/
+.comments-section .refresh-info {
+  font-size: 0.85rem;
+  font-style: italic;
+  color: var(--warna1);
+  margin-top: -15px; /* Tarik sedikit ke atas agar lebih dekat ke judul */
+  margin-bottom: 20px; /* Jarak ke daftar komentar */
+}
 
-/* --- AKHIR BAGIAN BARU: Komentar Section Styling --- */
+/* Styling untuk Container Google Form */
+.google-form-container {
+  background: rgba(
+    255,
+    255,
+    255,
+    0.7
+  ); /* Latar belakang transparan pada form */
+  border-radius: 20px;
+  padding: 15px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  margin-bottom: 30px; /* Jarak antara form dan daftar komentar */
+  overflow: hidden; /* Pastikan iframe tidak meluber */
+}
+
+.google-form-container iframe {
+  border: none;
+  width: 100%;
+  min-height: 500px; /* Tinggi minimum untuk iframe */
+  height: auto; /* Biarkan tinggi menyesuaikan konten jika memungkinkan */
+  display: block; /* Menghilangkan spasi ekstra di bawah iframe */
+}
+
+/* Styling untuk Daftar Komentar */
+#comments-list {
+  display: grid;
+  grid-template-columns: 1fr; /* Satu kolom default */
+  gap: 20px; /* Jarak antar komentar */
+  text-align: left; /* Teks di dalam komentar ke kiri */
+  padding: 15px; /* Padding di sekitar daftar komentar */
+  background: rgba(255, 255, 255, 0.7); /* Latar belakang transparan */
+  border-radius: 20px;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1); /* Shadow ke dalam */
+}
+
+/* Styling untuk Setiap Komentar Individu */
+.single-comment {
+  background: rgba(
+    255,
+    255,
+    255,
+    0.9
+  ); /* Latar belakang setiap kartu komentar */
+  border: 1px solid var(--warna3); /* Border halus */
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.single-comment:hover {
+  transform: translateY(-3px); /* Efek angkat saat hover */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.comment-author {
+  font-family: "Cormorant", serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--warna1); /* Warna nama */
+  margin-bottom: 8px;
+}
+
+.comment-text {
+  font-family: "Poppins", sans-serif;
+  font-size: 0.95rem;
+  color: var(--warna4);
+  margin-bottom: 10px;
+  line-height: 1.6;
+}
+
+.comment-date {
+  font-family: "Poppins", sans-serif;
+  font-size: 0.8rem;
+  color: #888; /* Warna abu-abu untuk tanggal */
+  text-align: right; /* Tanggal di pojok kanan bawah */
+}
+
+/* --- AKHIR BAGIAN BARU: Styling untuk Ucapan & Doa --- */
 
 /* Footer */
 footer {
@@ -473,6 +560,30 @@ footer a:hover {
   .comments-section {
     padding: 40px 15px;
   }
+
+  .comments-section h2 {
+    font-size: 1.8rem;
+  }
+
+  .comments-section h3 {
+    font-size: 1.4rem;
+  }
+
+  .google-form-container iframe {
+    min-height: 400px; /* Tinggi minimum iframe di mobile */
+  }
+
+  .comment-author {
+    font-size: 1.1rem;
+  }
+
+  .comment-text {
+    font-size: 0.9rem;
+  }
+
+  .comment-date {
+    font-size: 0.75rem;
+  }
 }
 
 /* For screens smaller than 480px (very small mobile) */
@@ -510,5 +621,17 @@ footer a:hover {
 
   .galeri-container .foto {
     height: auto; /* Biarkan tinggi menyesuaikan rasio aspek */
+  }
+
+  .comments-section h2 {
+    font-size: 1.6rem;
+  }
+
+  .comments-section h3 {
+    font-size: 1.2rem;
+  }
+
+  .google-form-container iframe {
+    min-height: 350px; /* Tinggi minimum iframe di mobile kecil */
   }
 }

@@ -32,7 +32,7 @@
       rel="stylesheet"
     />
     <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300..700;1,300..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sen:wght@400..800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300..700;1,300..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;0,600;0,700;1,700;1,800;1,900&family=Sen:wght@400..800&display=swap"
       rel="stylesheet"
     />
 
@@ -42,7 +42,7 @@
 
     <style>
       html {
-        overflow: hidden; /* Akan diaktifkan oleh JS saat tombol 'Buka Undangan' diklik */
+        overflow: hidden; /* Akan diaktifkan oleh JS saat tombol 'Buka Undangan' diklik atau jika sudah pernah dibuka */
       }
       body {
         margin: 0;
@@ -196,37 +196,31 @@
         <div class="comments-container">
           <h2>Ucapan & Doa</h2>
           <p>
-            Tinggalkan ucapan dan doa terbaik Anda untuk kami di kolom komentar
-            di bawah ini.
+            Tinggalkan ucapan dan doa terbaik Anda untuk kami melalui form di
+            bawah ini. Setelah Anda mengirimkan ucapan, silakan *refresh*
+            halaman untuk melihat pesan Anda muncul di daftar di bawahnya.
           </p>
 
-          <div id="disqus_thread"></div>
-          <script>
-            /**
-             * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-             * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables   */
+          <div class="google-form-container">
+            <iframe
+              src="https://docs.google.com/forms/d/e/1FAIpQLSfR99jU5dbgYbn8r0wNbo1Ss9P14-2EAFdrjJEuomdc0qVJEg/viewform?embedded=true"
+              width="100%"
+              height="600"
+              frameborder="0"
+              marginheight="0"
+              marginwidth="0"
+              loading="lazy"
+              >Memuat…</iframe
+            >
+          </div>
 
-            var disqus_config = function () {
-              this.page.url = "https://[URL-UNDANGAN-ANDA].github.io/"; // GANTI DENGAN URL ACTUAL WEBSITE UNDANGAN ANDA! Contoh: "https://namaakun.github.io/nama-repo/"
-              this.page.identifier = "undangan-bayou-rani"; // Ganti PAGE_IDENTIFIER dengan identifikasi unik untuk halaman ini, misal nama file HTML atau ID unik.
-            };
-
-            (function () {
-              // DON'T EDIT BELOW THIS LINE
-              var d = document,
-                s = d.createElement("script");
-              s.src =
-                "https://undangan-pernikahan-bayou-rani.disqus.com/embed.js"; // Pastikan domain Disqus Anda benar
-              s.setAttribute("data-timestamp", +new Date());
-              (d.head || d.body).appendChild(s);
-            })();
-          </script>
-          <noscript
-            >Please enable JavaScript to view the
-            <a href="https://disqus.com/?ref_noscript"
-              >comments powered by Disqus.</a
-            ></noscript
-          >
+          <h3>Pesan dari Para Tamu</h3>
+          <p class="refresh-info">
+            Silakan refresh halaman untuk melihat ucapan terbaru.
+          </p>
+          <div id="comments-list">
+            <p>Memuat ucapan dan doa...</p>
+          </div>
         </div>
       </section>
     </main>
@@ -252,102 +246,6 @@
     </audio>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const openBtn = document.getElementById("open-invitation-btn");
-        const bgMusic = document.getElementById("background-music");
-        const htmlElement = document.documentElement; // Mengacu pada tag <html>
-        let isMusicPlayingInitiated = false; // Flag untuk melacak apakah musik pernah diputar oleh pengguna
-
-        // Fungsi untuk melakukan smooth scroll secara kustom
-        function customSmoothScroll(targetId, duration) {
-          const targetElement = document.getElementById(targetId);
-          if (!targetElement) return;
-
-          const startPosition = window.pageYOffset;
-          const targetPosition =
-            targetElement.getBoundingClientRect().top + window.pageYOffset;
-          const distance = targetPosition - startPosition;
-          let startTime = null;
-
-          function animation(currentTime) {
-            if (startTime === null) startTime = currentTime;
-            const timeElapsed = currentTime - startTime;
-            const run = easeInOutQuad(
-              timeElapsed,
-              startPosition,
-              distance,
-              duration
-            );
-            window.scrollTo(0, run);
-            if (timeElapsed < duration) requestAnimationFrame(animation);
-          }
-
-          // Fungsi easing (membuat animasi lebih halus dari linear)
-          function easeInOutQuad(t, b, c, d) {
-            t /= d / 2;
-            if (t < 1) return (c / 2) * t * t + b;
-            t--;
-            return (-c / 2) * (t * (t - 2) - 1) + b;
-          }
-
-          requestAnimationFrame(animation);
-        }
-
-        // Fungsi yang dipanggil saat tombol "Buka Undangan" diklik
-        function activateContentAndScroll() {
-          htmlElement.style.overflow = "auto"; // Mengaktifkan scroll
-          if (bgMusic) {
-            bgMusic
-              .play()
-              .then(() => {
-                isMusicPlayingInitiated = true; // Musik berhasil diputar
-              })
-              .catch((e) => console.error("Error playing music:", e));
-          }
-          openBtn.removeEventListener("click", activateContentAndScroll);
-
-          // Panggil custom smooth scroll
-          customSmoothScroll("main-content", 1500); // 1500ms = 1.5 detik
-
-          AOS.init({
-            duration: 1000,
-            once: true,
-          });
-        }
-
-        // Tambahkan event listener ke tombol "Buka Undangan"
-        if (openBtn) {
-          openBtn.addEventListener("click", function (event) {
-            event.preventDefault();
-            activateContentAndScroll(); // Panggil fungsi baru ini
-          });
-        }
-
-        // --- Bagian Mengelola Musik berdasarkan Visibilitas Tab ---
-        document.addEventListener("visibilitychange", function () {
-          if (bgMusic && isMusicPlayingInitiated) {
-            if (document.hidden) {
-              bgMusic.pause();
-            } else {
-              bgMusic
-                .play()
-                .catch((e) => console.error("Error resuming music:", e));
-            }
-          }
-        });
-
-        // --- Bagian untuk Menghentikan Musik saat Link Eksternal Diklik ---
-        const externalLinks = document.querySelectorAll('a[target="_blank"]');
-
-        externalLinks.forEach((link) => {
-          link.addEventListener("click", function () {
-            if (bgMusic && !bgMusic.paused) {
-              bgMusic.pause();
-            }
-          });
-        });
-      });
-    </script>
+    <script src="script.js"></script>
   </body>
 </html>
