@@ -467,6 +467,9 @@ footer a:hover {
   .foto {
     height: 200px;
   }
+  footer{
+    font-size: smaller
+  }
 }
 
 @media (max-width: 480px) {
