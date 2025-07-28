@@ -3,7 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bayou & Rani Wedding</title>
+    <title>Bayou & Rani Wedding | 25 November 2023</title>
+    <meta
+      name="description"
+      content="Undangan pernikahan Ahmad Bayou Damara, S.T. dan drg. Silvia Rani Anggraini - 25 November 2023"
+    />
+    <meta
+      name="keywords"
+      content="undangan pernikahan, wedding, Bayou Rani, nikah, Surabaya"
+    />
+    <meta name="author" content="AlFir-Card" />
 
     <!-- Preconnect Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -15,24 +24,57 @@
       rel="stylesheet"
     />
 
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.webp" type="image/webp" />
+
     <!-- CSS -->
     <link rel="stylesheet" href="style.css" />
 
-    <!-- Scroll Smooth -->
     <style>
-      html {
-        scroll-behavior: smooth;
+      /* Tambahkan ini di CSS */
+      body.locked {
+        overflow: hidden;
+        height: 100vh;
+      }
+
+      .scroll-indicator {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        color: white;
+        font-size: 1.2rem;
+        animation: bounce 2s infinite;
+        z-index: 10;
+        display: none;
+      }
+
+      @keyframes bounce {
+        0%,
+        20%,
+        50%,
+        80%,
+        100% {
+          transform: translateY(0) translateX(-50%);
+        }
+        40% {
+          transform: translateY(-20px) translateX(-50%);
+        }
+        60% {
+          transform: translateY(-10px) translateX(-50%);
+        }
       }
     </style>
   </head>
 
-  <body>
+  <body class="locked">
     <section id="hero" class="hero">
+      <div class="hero-overlay"></div>
       <div class="hero-container">
         <h2>The Wedding</h2>
         <h1>Bayou & Rani</h1>
-        <p>dua jiwa berbeda mengikat janji suci bersatu dalam cinta</p>
-        <h4>Kepada Yth. <br />Bapak/Ibu/Saudara/i</h4>
+        <p>Dua jiwa berbeda mengikat janji suci bersatu dalam cinta</p>
+        <h4>Kepada Yth.<br />Bapak/Ibu/Saudara/i</h4>
         <a href="#main" class="btn" aria-label="Buka undangan pernikahan"
           >Buka Undangan</a
         >
@@ -79,6 +121,7 @@
               href="https://maps.app.goo.gl/tjJqCvX2QzNzRWc1A"
               class="map"
               target="_blank"
+              rel="noopener noreferrer"
               >Lokasi Akad</a
             >
           </article>
@@ -95,6 +138,7 @@
               href="https://maps.app.goo.gl/tjJqCvX2QzNzRWc1A"
               class="map"
               target="_blank"
+              rel="noopener noreferrer"
               >Lokasi Resepsi</a
             >
           </article>
@@ -113,42 +157,69 @@
       <section class="gallery-section">
         <h2>Galeri</h2>
         <div class="galeri-container">
-          <img
-            src="image/hiroback.jpg"
-            class="foto"
-            alt="Bayou & Rani - Galeri 1"
-          />
-          <img
-            src="image/hiroback.jpg"
-            class="foto"
-            alt="Bayou & Rani - Galeri 2"
-          />
-          <img
-            src="image/hiroback.jpg"
-            class="foto"
-            alt="Bayou & Rani - Galeri 3"
-          />
-          <img
-            src="image/hiroback.jpg"
-            class="foto"
-            alt="Bayou & Rani - Galeri 4"
-          />
+          <picture>
+            <source srcset="image/hiroback.webp" type="image/webp" />
+            <img
+              src="image/hiroback.jpg"
+              class="foto"
+              alt="Bayou & Rani - Momen Prewedding 1"
+              loading="lazy"
+            />
+          </picture>
+          <picture>
+            <source srcset="image/hiroback.webp" type="image/webp" />
+            <img
+              src="image/hiroback.jpg"
+              class="foto"
+              alt="Bayou & Rani - Momen Prewedding 2"
+              loading="lazy"
+            />
+          </picture>
+          <picture>
+            <source srcset="image/hiroback.webp" type="image/webp" />
+            <img
+              src="image/hiroback.jpg"
+              class="foto"
+              alt="Bayou & Rani - Momen Prewedding 3"
+              loading="lazy"
+            />
+          </picture>
+          <picture>
+            <source srcset="image/hiroback.webp" type="image/webp" />
+            <img
+              src="image/hiroback.jpg"
+              class="foto"
+              alt="Bayou & Rani - Momen Prewedding 4"
+              loading="lazy"
+            />
+          </picture>
         </div>
       </section>
 
       <section class="comments-section">
         <h2>Ucapan & Doa</h2>
         <p>
-          Silakan tinggalkan ucapan untuk kedua mempelai tanpa perlu login akun
-          apa pun.
+          Silakan tinggalkan ucapan untuk kedua mempelai dengan menuliskan pada
+          komentar dibawah.
         </p>
         <form id="comment-form">
-          <input type="text" name="nama" placeholder="Nama Anda" required />
+          <input
+            type="text"
+            name="nama"
+            placeholder="Nama Anda"
+            minlength="3"
+            maxlength="50"
+            required
+            aria-label="Nama Anda"
+          />
           <textarea
             name="komentar"
             rows="4"
             placeholder="Ucapan & Doa"
+            minlength="5"
+            maxlength="300"
             required
+            aria-label="Ucapan dan Doa"
           ></textarea>
           <button type="submit">Kirim</button>
         </form>
@@ -163,65 +234,310 @@
     <footer>
       <div class="footer-container">
         <p>&copy; 2023 Bayou & Rani Wedding. All rights reserved.</p>
-        <span
-          >Designed by
-          <a href="https://instagram.com/alfir.card" target="_blank"
+        <span>
+          Designed by
+          <a
+            href="https://instagram.com/alfir.card"
+            target="_blank"
+            rel="noopener noreferrer"
             >AlFir-Card</a
-          ></span
-        >
+          >
+        </span>
       </div>
     </footer>
 
-    <!-- Script untuk Komentar via Google Sheets -->
+    <!-- Tambahkan audio element -->
+    <audio id="weddingAudio" loop>
+      <source src="musik/backsound.mp3" type="audio/mpeg" />
+      Browser Anda tidak mendukung audio.
+    </audio>
+
+    <div class="scroll-indicator" id="scrollIndicator">
+      <span id="indicatorText">⬇ Scroll untuk melanjutkan ⬇</span>
+    </div>
+
     <script>
+      // Inisialisasi variabel
+      const body = document.body;
+      const audio = document.getElementById("weddingAudio");
+      const openBtn = document.querySelector(".hero .btn");
+      const scrollIndicator = document.getElementById("scrollIndicator");
+      let isAudioPlaying = false;
+
+      // JavaScript
+      const indicatorText = document.getElementById("indicatorText");
+
+      function checkScrollPosition() {
+        const scrollPosition = window.scrollY + window.innerHeight;
+        const pageHeight = document.documentElement.scrollHeight;
+        const isAtBottom = scrollPosition >= pageHeight - 50; // Tolerance 50px
+
+        if (isAtBottom) {
+          scrollIndicator.classList.remove("down");
+          scrollIndicator.classList.add("up");
+          indicatorText.textContent = "Kembali ke atas";
+
+          // Ganti behavior klik saat di bagian bawah
+          scrollIndicator.onclick = function () {
+            window.scrollTo({
+              top: 0,
+              behavior: "smooth",
+            });
+          };
+        } else {
+          scrollIndicator.classList.remove("up");
+          scrollIndicator.classList.add("down");
+          indicatorText.textContent = "Scroll untuk melanjutkan";
+
+          // Klik untuk scroll ke bawah jika belum sampai bawah
+          scrollIndicator.onclick = function () {
+            window.scrollBy({
+              top: window.innerHeight * 0.8,
+              behavior: "smooth",
+            });
+          };
+        }
+      }
+
+      // Panggil saat scroll
+      window.addEventListener("scroll", checkScrollPosition);
+
+      // Panggil saat resize (untuk handle responsive)
+      window.addEventListener("resize", checkScrollPosition);
+
+      // Inisialisasi pertama kali
+      checkScrollPosition();
+
+      // Fungsi untuk membuka undangan
+      function openInvitation() {
+        // Unlock scroll
+        body.classList.remove("locked");
+
+        // Tampilkan scroll indicator
+        scrollIndicator.style.display = "block";
+
+        // Mulai audio dengan volume rendah
+        audio.volume = 0.3;
+        audio
+          .play()
+          .then(() => {
+            isAudioPlaying = true;
+            console.log("Audio started playing");
+          })
+          .catch((error) => {
+            console.log("Audio play failed:", error);
+            // Fallback: tetap lanjutkan tanpa audio
+            smoothScrollToMain();
+          });
+
+        // Scroll halus ke main
+        smoothScrollToMain();
+      }
+
+      // Fungsi scroll halus
+      function smoothScrollToMain() {
+        const mainSection = document.getElementById("main");
+        const targetPosition = mainSection.offsetTop;
+        const startPosition = window.pageYOffset;
+        const distance = targetPosition - startPosition;
+        const duration = 3000; // 3 detik
+        let startTime = null;
+
+        function animation(currentTime) {
+          if (startTime === null) startTime = currentTime;
+          const timeElapsed = currentTime - startTime;
+          const run = easeInOutQuad(
+            timeElapsed,
+            startPosition,
+            distance,
+            duration
+          );
+          window.scrollTo(0, run);
+          if (timeElapsed < duration) requestAnimationFrame(animation);
+        }
+
+        // Easing function untuk efek halus
+        function easeInOutQuad(t, b, c, d) {
+          t /= d / 2;
+          if (t < 1) return (c / 2) * t * t + b;
+          t--;
+          return (-c / 2) * (t * (t - 2) - 1) + b;
+        }
+
+        requestAnimationFrame(animation);
+      }
+
+      // Event listener untuk tombol buka undangan
+      openBtn.addEventListener("click", function (e) {
+        e.preventDefault();
+        openInvitation();
+      });
+
+      // Kontrol audio saat tab/window tidak aktif
+      document.addEventListener("visibilitychange", function () {
+        if (document.hidden) {
+          if (isAudioPlaying) {
+            audio.pause();
+          }
+        } else {
+          if (isAudioPlaying && !audio.paused) {
+            audio.play().catch((e) => console.log("Audio resume error:", e));
+          }
+        }
+      });
+
+      // Pause audio saat klik link eksternal
+      const externalLinks = document.querySelectorAll('a[target="_blank"]');
+      externalLinks.forEach((link) => {
+        link.addEventListener("click", function () {
+          if (isAudioPlaying) {
+            audio.pause();
+          }
+        });
+      });
+
+      // Cek jika user mencoba scroll sebelum membuka undangan
+      window.addEventListener("scroll", function () {
+        if (body.classList.contains("locked")) {
+          window.scrollTo(0, 0);
+        }
+      });
+
+      // Optional: Keyboard control untuk aksesibilitas
+      window.addEventListener("keydown", function (e) {
+        if (e.code === "Space" || e.key === "Enter") {
+          if (body.classList.contains("locked")) {
+            e.preventDefault();
+            openInvitation();
+          }
+        }
+      });
+    </script>
+
+    <script>
+      // Script untuk Komentar via Google Sheets
       const scriptURL =
         "https://script.google.com/macros/s/AKfycbwLgsretbK89b0TgZClxzE_yZt3fDotsETj75-KFbdXjAmD1X5I9zgKyDmM41v5wAv3/exec";
       const form = document.getElementById("comment-form");
       const list = document.getElementById("comments-list");
 
+      // Fungsi untuk memformat tanggal
+      const formatDate = (dateString) => {
+        const options = {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+        };
+        return new Date(dateString).toLocaleDateString("id-ID", options);
+      };
+
       form.addEventListener("submit", (e) => {
         e.preventDefault();
-        const data = new FormData(form);
+        const submitBtn = form.querySelector("button");
+        const originalText = submitBtn.textContent;
 
-        fetch(scriptURL, { method: "POST", body: data })
+        // Tampilkan loading state
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Mengirim...";
+
+        fetch(scriptURL, {
+          method: "POST",
+          body: new FormData(form),
+        })
           .then((response) => {
+            if (!response.ok) throw new Error("Network response was not ok");
+            return response;
+          })
+          .then(() => {
             alert("Terima kasih atas ucapan Anda!");
             form.reset();
             loadComments();
           })
-          .catch((error) => alert("Gagal mengirim ucapan. Coba lagi."));
+          .catch((error) => {
+            console.error("Error:", error);
+            alert("Gagal mengirim ucapan. Silakan coba lagi nanti.");
+          })
+          .finally(() => {
+            submitBtn.disabled = false;
+            submitBtn.textContent = originalText;
+          });
       });
 
       async function loadComments() {
-        const sheetURL =
-          "https://docs.google.com/spreadsheets/d/1Uq4q7ry5nETqQkVcDUx_hAUO21fj5K1VKNvhHodmYC8/gviz/tq?tqx=out:json";
-        const res = await fetch(sheetURL);
-        const text = await res.text();
-        const json = JSON.parse(text.substring(47).slice(0, -2));
+        try {
+          const sheetURL =
+            "https://docs.google.com/spreadsheets/d/1Uq4q7ry5nETqQkVcDUx_hAUO21fj5K1VKNvhHodmYC8/gviz/tq?tqx=out:json";
+          const res = await fetch(sheetURL);
+          if (!res.ok) throw new Error("Failed to fetch comments");
 
-        list.innerHTML = "";
-        json.table.rows.reverse().forEach((row) => {
-          const nama = row.c[0]?.v;
-          const komentar = row.c[1]?.v;
-          const tanggal = row.c[2]?.v;
+          const text = await res.text();
+          const json = JSON.parse(text.substring(47).slice(0, -2));
 
-          // Lewati komentar kosong atau dummy header
-          if (!nama || nama.toLowerCase() === "nama") return;
-          if (!komentar || komentar.toLowerCase() === "komentar") return;
-          if (!tanggal || tanggal.toLowerCase() === "tanggal") return;
+          list.innerHTML = "";
 
-          const el = document.createElement("div");
-          el.className = "single-comment";
-          el.innerHTML = `
-          <div class="comment-author">${nama}</div>
-          <div class="comment-text">${komentar}</div>
-          <div class="comment-date">${tanggal}</div>
-        `;
-          list.appendChild(el);
-        });
+          json.table.rows.reverse().forEach((row) => {
+            const nama = row.c[0]?.v;
+            const komentar = row.c[1]?.v;
+            const tanggal = row.c[2]?.v;
+
+            if (!nama || !komentar || !tanggal) return;
+            if (
+              nama.toLowerCase() === "nama" ||
+              komentar.toLowerCase() === "komentar"
+            )
+              return;
+
+            // Perbaikan utama: Handle berbagai format tanggal
+            let formattedDate;
+            try {
+              // Coba parsing sebagai Date object (untuk format timestamp)
+              const dateObj = new Date(tanggal);
+
+              // Jika invalid date, tampilkan langsung string aslinya
+              if (isNaN(dateObj.getTime())) {
+                formattedDate = tanggal;
+              } else {
+                formattedDate = dateObj.toLocaleDateString("id-ID", {
+                  day: "numeric",
+                  month: "long",
+                  year: "numeric",
+                  hour: "2-digit",
+                  minute: "2-digit",
+                });
+              }
+            } catch (e) {
+              formattedDate = tanggal; // Fallback ke string asli jika parsing gagal
+            }
+
+            const commentEl = document.createElement("div");
+            commentEl.className = "single-comment";
+            commentEl.innerHTML = `
+        <div class="comment-author">${nama}</div>
+        <div class="comment-text">${komentar}</div>
+        <div class="comment-date">${formattedDate}</div>
+      `;
+            list.appendChild(commentEl);
+          });
+        } catch (error) {
+          console.error("Error loading comments:", error);
+          list.innerHTML = `<p class="error-message">Gagal memuat komentar. Silakan refresh halaman.</p>`;
+        }
       }
 
-      window.addEventListener("DOMContentLoaded", loadComments);
+      // Load comments when page loads
+      document.addEventListener("DOMContentLoaded", () => {
+        loadComments();
+
+        // Lazy load images
+        if ("loading" in HTMLImageElement.prototype) {
+          const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+          lazyImages.forEach((img) => {
+            img.src = img.dataset.src;
+          });
+        }
+      });
     </script>
   </body>
 </html>
