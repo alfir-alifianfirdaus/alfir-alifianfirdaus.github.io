@@ -1,637 +1,292 @@
+/* ===== General Styles ===== */
 :root {
-  --warna1: #736e26; /* Darker Gold/Olive */
-  --warna2: #f2d16d; /* Lighter Gold/Yellow */
-  --warna3: #d9c196; /* Muted Beige/Brown */
-  --warna4: #402c14; /* Dark Brown */
-  --warna5: #a64646; /* Muted Red/Brown */
-}
-
-/* Base Styles */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+  --primary-color: #6c4f3d;
+  --secondary-color: #e9dfd1;
+  --font-main: "Poppins", sans-serif;
+  --font-title: "Playfair Display", serif;
+  --font-script: "Sacramento", cursive;
 }
 
 body {
-  font-size: 1rem;
-  font-family: "Poppins", sans-serif; /* Menggunakan Poppins sebagai font dasar */
-  line-height: 1.6;
-  color: var(--warna4); /* Warna teks default */
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-main);
+  background-color: #fff;
+  color: #333;
+  background-image: url("image/back1.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  z-index: 1;
 }
 
-/* Hero Section */
-.hero {
+/* Overlay transparan */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
-  min-height: 100dvh; /* Menggunakan 100dvh untuk viewport height dinamis */
-  padding: 20px; /* Tambah padding sedikit untuk konten */
-  margin: auto;
+  height: 100%;
+  background-color: rgba(254, 255, 170, 0.7); /* Putih transparan */
+  z-index: -1; /* di bawah isi halaman */
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: var(--font-title);
+  color: var(--primary-color);
   text-align: center;
+}
+
+h1 {
+  font-size: 3rem;
+  margin: 0.2em 0;
+}
+
+h2 {
+  font-size: 2rem;
+  margin: 1em 0 0.3em;
+}
+
+h3 {
+  font-size: 1.4rem;
+  margin: 0.5em 0 0.2em;
+}
+
+h4,
+h5 {
+  margin: 0.3em 0;
+}
+
+p {
+  line-height: 1.6;
+  margin: 0.5em auto;
+  max-width: 600px;
+  text-align: center;
+}
+
+section {
+  padding: 2em 1em;
+  text-align: center;
+}
+
+/* ===== Hero Section ===== */
+.hero {
+  background-image: url("image/hiroback.jpg");
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative; /* Penting untuk pseudo-element */
-  overflow: hidden; /* Pastikan tidak ada scrollbar yang muncul karena blur */
+  position: relative;
 }
 
 .hero::before {
   content: "";
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url(image/hiroback.jpg);
-  background-size: cover; /* Menggunakan cover agar gambar selalu memenuhi */
-  background-repeat: no-repeat;
-  background-position: center;
-  z-index: -1;
-  filter: blur(3px); /* Sedikit lebih blur agar teks menonjol */
-  transform: scale(1.02); /* Untuk mengatasi pinggiran blur yang terlihat */
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 0;
 }
 
 .hero-container {
-  padding: 20px;
-  background: rgba(255, 255, 255, 0.2); /* Sedikit overlay transparan */
-  border-radius: 15px;
-  backdrop-filter: blur(2px); /* Efek blur pada konten */
-}
-
-.hero-container h2 {
-  font-size: 1.6rem;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-  padding-bottom: 0.6rem;
-  color: white; /* Pastikan warna teks terlihat jelas */
-  font-family: "Cormorant", serif;
-  font-weight: 400;
-}
-
-.hero-container h1 {
-  font-family: "Tangerine", cursive;
-  font-size: 4.5rem; /* Ukuran lebih besar untuk nama */
-  font-weight: bold;
-  text-shadow: 2px 2px 2px var(--warna4);
+  position: relative;
+  z-index: 1;
   color: white;
-  padding-bottom: 0.4rem;
-  line-height: 1; /* Hapus spasi ekstra */
-}
-
-.hero-container p {
-  font-family: "Playfair Display", serif;
-  font-size: 0.9rem;
-  padding: 0 20px 1.5rem; /* Kurangi padding horizontal sedikit */
-  font-style: italic;
-  color: white;
-}
-
-.hero-container h4 {
-  font-family: "Cormorant", serif; /* Ganti ke Cormorant untuk konsistensi */
-  font-weight: 500;
-  padding-bottom: 2rem;
-  color: var(--warna3); /* Warna lebih terang */
-  font-size: 1rem;
-}
-
-.hero-container .btn {
-  font-family: "Cormorant", serif;
-  text-decoration: none;
-  font-weight: bolder;
-  color: var(--warna4); /* Tambahkan warna teks yang jelas */
-  padding: 8px 40px; /* Sedikit lebih tinggi */
-  background: linear-gradient(130deg, var(--warna2), var(--warna1));
-  border-radius: 25px; /* Lebih bulat */
-  transition: all 0.3s ease-in-out;
-  display: inline-block; /* Agar padding bekerja sempurna */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Tambah shadow */
-  cursor: pointer; /* Menunjukkan bahwa ini bisa diklik */
-}
-
-.hero-container .btn:hover {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* Efek shadow saat hover */
-  transform: translateY(-2px); /* Efek angkat sedikit */
-}
-/* --- Perbaikan: Efek Tombol Saat Diklik --- */
-.hero-container .btn:active {
-  transform: translateY(-1px) scale(0.98); /* Sedikit turun dan mengecil */
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4); /* Bayangan lebih tipis saat ditekan */
-  opacity: 0.9; /* Sedikit memudar */
-  transition: all 0.1s ease-in-out; /* Transisi lebih cepat untuk efek "klik" */
-}
-/* --- Akhir Perbaikan Tombol --- */
-
-/* Main Content Wrapper */
-main {
-  width: 100%;
-  min-height: 100svh; /* Menggunakan 100svh untuk viewport height dinamis */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-image: url(image/back1.png);
-  background-size: cover; /* Menggunakan cover agar gambar latar selalu memenuhi */
-  background-repeat: no-repeat;
-  background-position: center;
-  background-attachment: fixed; /* Opsi: latar belakang tidak scroll */
-  padding-bottom: 40px; /* Tambah padding bawah untuk ruang */
-}
-
-/* Card Styles */
-.ayat-section,
-.info-section,
-.closing-section,
-.gallery-section,
-.comments-section {
-  width: 90%;
-  max-width: 800px; /* Batasi lebar maksimum untuk readability */
-  margin-top: 30px; /* Jarak antar section */
-  padding: 25px 30px; /* Padding lebih banyak */
-  background: rgba(242, 209, 109, 0.8); /* Warna dasar kartu */
-  border-radius: 40px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Shadow pada kartu */
   text-align: center;
 }
 
-.card-ayat p {
-  font-family: "Playfair Display", serif;
-  font-size: 0.95rem;
-  font-style: italic;
-  padding-bottom: 15px;
-  color: var(--warna4);
-}
-
-.card-ayat h5 {
-  font-size: 1.3rem;
-  font-family: "Cormorant", serif;
-  font-weight: bolder;
-  color: var(--warna4);
-}
-
-.pembuka h3 {
-  font-family: "Playfair Display", serif;
-  font-size: 1.2rem;
-  margin-bottom: 10px;
-  color: var(--warna4);
-}
-
-.pembuka p {
-  font-family: "Poppins", sans-serif;
-  font-size: 0.95rem;
-  color: var(--warna4);
-}
-
-.nama {
-  padding-top: 30px;
-  padding-bottom: 20px;
-}
-
-.nama h2 {
-  font-family: "Tangerine", cursive;
-  font-size: 2rem; /* Ukuran nama pengantin */
-  color: var(--warna4);
-  text-shadow: 1px 1px 2px var(--warna1);
-  font-weight: normal; /* Biarkan normal, Tangerine sudah tebal */
-  line-height: 1.2;
-  word-wrap: break-word; /* Tambahkan ini untuk mencegah teks meluber */
-}
-
-.nama p {
-  font-family: "Poppins", sans-serif;
-  font-size: 0.85rem;
-  line-height: 1.4;
-  color: var(--warna4);
-  margin-top: 5px;
-}
-
-.nama .ampersand {
-  font-family: "Tangerine", cursive;
-  font-size: 4rem; /* Ukuran simbol & */
-  color: var(--warna4);
-  text-shadow: 1px 1px 2px var(--warna1);
-  margin: 10px 0; /* Jarak atas bawah */
+.hero .btn {
   display: inline-block;
+  margin-top: 1em;
+  padding: 0.75em 1.5em;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background-color 0.3s;
 }
 
+.hero .btn:hover {
+  background-color: #563d2c;
+}
+
+/* ===== Nama Section ===== */
+.nama {
+  margin: 2em 0;
+}
+
+.ampersand {
+  font-size: 2rem;
+  display: inline-block;
+  margin: 1em;
+  color: var(--primary-color);
+  font-family: var(--font-script);
+}
+
+/* ===== Acara Cards ===== */
 .acara {
-  width: 100%;
-  display: grid;
-  grid-template-columns: 1fr 1fr; /* Default untuk desktop */
-  gap: 20px; /* Jarak antar kolom */
-  margin-top: 30px;
-  text-align: center;
-  background: rgba(
-    255,
-    255,
-    255,
-    0.5
-  ); /* Latar belakang lebih terang untuk sub-card */
-  padding: 20px;
-  border-radius: 20px;
-}
-
-.acara .akad,
-.acara .resepsi {
   display: flex;
-  flex-direction: column;
-  justify-content: space-between; /* Untuk mendorong tombol ke bawah */
-  padding: 15px;
-  border: 1px solid rgba(0, 0, 0, 0.1); /* Border tipis */
-  border-radius: 15px;
-  background: rgba(255, 255, 255, 0.7); /* Latar belakang untuk setiap acara */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2em;
+  margin-top: 2em;
 }
 
-.acara h4 {
-  padding-bottom: 10px;
-  color: var(--warna4);
-  font-family: "Playfair Display", serif;
-  font-weight: 800;
-  font-size: 1.1rem;
-}
-
-.acara p {
-  font-size: 0.9rem;
-  color: var(--warna4);
-  text-shadow: none; /* Hapus text-shadow */
-  margin-bottom: 15px; /* Jarak ke tombol */
+.acara article {
+  background-color: var(--secondary-color);
+  padding: 1.5em;
+  border-radius: 10px;
+  max-width: 350px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
 }
 
 .acara span {
-  font-weight: 600;
-  color: var(--warna1); /* Warna penekanan */
+  font-weight: bold;
 }
 
 .acara .map {
-  margin-top: auto; /* Dorong tombol ke paling bawah */
-  background: linear-gradient(130deg, var(--warna2), var(--warna1));
-  color: var(--warna4); /* Warna teks yang jelas */
-  padding: 8px 15px;
-  border-radius: 25px;
-  transition: all 0.3s ease-in-out;
-  display: inline-block; /* Agar padding bekerja */
+  display: inline-block;
+  margin-top: 1em;
+  background-color: var(--primary-color);
+  color: white;
+  padding: 0.5em 1em;
   text-decoration: none;
-  font-weight: bolder;
-  font-family: "Cormorant", serif;
-  font-size: 0.95rem;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  cursor: pointer; /* Menunjukkan bahwa ini bisa diklik */
+  border-radius: 5px;
+  font-size: 0.9rem;
 }
 
 .acara .map:hover {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  transform: translateY(-2px);
-}
-/* --- Perbaikan: Efek Tombol Map Saat Diklik --- */
-.acara .map:active {
-  transform: translateY(-1px) scale(0.98); /* Sedikit turun dan mengecil */
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4); /* Bayangan lebih tipis saat ditekan */
-  opacity: 0.9; /* Sedikit memudar */
-  transition: all 0.1s ease-in-out; /* Transisi lebih cepat untuk efek "klik" */
-}
-/* --- Akhir Perbaikan Tombol Map --- */
-
-.penutup {
-  font-family: "Playfair Display", serif;
+  background-color: #4b3627;
 }
 
-.penutup h5 {
-  padding-top: 15px;
-  font-weight: bolder;
-  font-size: 1.2rem;
-  color: var(--warna4);
-}
-
-.penutup p {
-  font-size: 0.95rem;
-  color: var(--warna4);
-}
-
-.galeri h2 {
-  font-family: "Cormorant", serif;
-  font-size: 1.8rem;
-  padding-bottom: 15px;
-  color: var(--warna4);
-}
-
+/* ===== Galeri ===== */
 .galeri-container {
-  width: 100%;
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* Default 2 kolom */
-  gap: 10px; /* Jarak antar gambar */
-  padding-top: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1em;
+  padding: 1em;
+  max-width: 1000px;
+  margin: auto;
 }
 
-.galeri-container .foto {
+.foto {
   width: 100%;
-  aspect-ratio: 16 / 9; /* Menjaga rasio aspek gambar */
-  object-fit: cover;
+  height: auto;
   border-radius: 10px;
-  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  object-fit: cover;
 }
 
-.galeri-container .foto:hover {
-  transform: scale(1.05); /* Sedikit zoom yang lebih aman */
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Shadow yang lebih kuat */
-  z-index: 1; /* Pastikan gambar yang dihover di atas */
-}
-
-/* --- BAGIAN BARU: Styling untuk Ucapan & Doa (Google Form & Komentar) --- */
+/* ===== Komentar Section ===== */
 .comments-section {
-  padding: 40px 30px; /* Padding section */
-}
-
-.comments-section .comments-container {
-  /* Inherit max-width dan margin dari .comments-section */
-  padding: 0;
+  background-color: #f8f5f1;
+  padding: 2em 1em;
   text-align: center;
 }
 
-.comments-section h2 {
-  font-family: "Cormorant", serif;
-  font-size: 2.2rem; /* Ukuran lebih besar untuk judul utama */
-  margin-bottom: 10px;
-  color: var(--warna4);
-}
-
-.comments-section h3 {
-  font-family: "Playfair Display", serif;
-  font-size: 1.6rem; /* Ukuran lebih besar untuk sub-judul */
-  margin-top: 40px; /* Jarak dari form ke daftar komentar */
-  margin-bottom: 15px;
-  color: var(--warna4);
-}
-
-.comments-section p {
-  font-family: "Poppins", sans-serif;
-  font-size: 0.95rem;
-  margin-bottom: 25px; /* Jarak dari paragraf ke form */
-  color: var(--warna4);
-  line-height: 1.5;
-}
-
-.comments-section .refresh-info {
-  font-size: 0.85rem;
-  font-style: italic;
-  color: var(--warna1);
-  margin-top: -15px; /* Tarik sedikit ke atas agar lebih dekat ke judul */
-  margin-bottom: 20px; /* Jarak ke daftar komentar */
-}
-
-/* Styling untuk Container Google Form */
-.google-form-container {
-  background: rgba(
-    255,
-    255,
-    255,
-    0.7
-  ); /* Latar belakang transparan pada form */
-  border-radius: 20px;
-  padding: 15px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-  margin-bottom: 30px; /* Jarak antara form dan daftar komentar */
-  overflow: hidden; /* Pastikan iframe tidak meluber */
-}
-
-.google-form-container iframe {
-  border: none;
+#comment-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1em;
+  margin: 1em auto;
+  max-width: 500px;
   width: 100%;
-  min-height: 500px; /* Tinggi minimum untuk iframe */
-  height: auto; /* Biarkan tinggi menyesuaikan konten jika memungkinkan */
-  display: block; /* Menghilangkan spasi ekstra di bawah iframe */
 }
 
-/* Styling untuk Daftar Komentar */
+#comment-form input,
+#comment-form textarea {
+  width: 100%;
+  padding: 0.75em;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-family: var(--font-main);
+}
+
+#comment-form button {
+  padding: 0.75em 2em;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#comment-form button:hover {
+  background-color: #4b3627;
+}
+
 #comments-list {
-  display: grid;
-  grid-template-columns: 1fr; /* Satu kolom default */
-  gap: 20px; /* Jarak antar komentar */
-  text-align: left; /* Teks di dalam komentar ke kiri */
-  padding: 15px; /* Padding di sekitar daftar komentar */
-  background: rgba(255, 255, 255, 0.7); /* Latar belakang transparan */
-  border-radius: 20px;
-  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1); /* Shadow ke dalam */
+  margin-top: 2em;
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 1em;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-/* Styling untuk Setiap Komentar Individu */
 .single-comment {
-  background: rgba(
-    255,
-    255,
-    255,
-    0.9
-  ); /* Latar belakang setiap kartu komentar */
-  border: 1px solid var(--warna3); /* Border halus */
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-}
-
-.single-comment:hover {
-  transform: translateY(-3px); /* Efek angkat saat hover */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  background-color: #fff;
+  padding: 1em;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  text-align: left;
 }
 
 .comment-author {
-  font-family: "Cormorant", serif;
-  font-size: 1.15rem;
-  font-weight: 700;
-  color: var(--warna1); /* Warna nama */
-  margin-bottom: 8px;
+  font-weight: bold;
+  color: var(--primary-color);
 }
 
 .comment-text {
-  font-family: "Poppins", sans-serif;
-  font-size: 0.95rem;
-  color: var(--warna4);
-  margin-bottom: 10px;
-  line-height: 1.6;
+  margin: 0.5em 0;
 }
 
 .comment-date {
-  font-family: "Poppins", sans-serif;
-  font-size: 0.8rem;
-  color: #888; /* Warna abu-abu untuk tanggal */
-  text-align: right; /* Tanggal di pojok kanan bawah */
+  font-size: 0.85rem;
+  color: #777;
 }
 
-/* --- AKHIR BAGIAN BARU: Styling untuk Ucapan & Doa --- */
-
-/* Footer */
+/* ===== Footer ===== */
 footer {
-  width: 100%;
-  background-color: var(--warna1);
+  background-color: var(--primary-color);
   color: white;
+  padding: 1em;
   text-align: center;
-  padding: 15px; /* Padding sedikit lebih besar */
-  font-size: 0.85rem;
 }
 
 footer a {
-  color: var(--warna2);
-  text-decoration: none;
-  font-weight: 600;
-}
-
-footer a:hover {
+  color: #f5f5f5;
   text-decoration: underline;
 }
 
-/* --- Media Queries for Responsiveness --- */
-
-/* For screens smaller than 768px (e.g., tablets and mobile) */
-@media (max-width: 768px) {
-  .hero-container h1 {
-    font-size: 3.5rem; /* Lebih kecil di mobile */
+/* ===== Responsiveness ===== */
+@media (max-width: 600px) {
+  h1 {
+    font-size: 2.3rem;
   }
-
-  .hero-container p {
-    font-size: 0.8rem;
+  h2 {
+    font-size: 1.5rem;
   }
-
-  .hero-container .btn {
-    padding: 6px 30px;
-    font-size: 0.9rem;
-  }
-
-  .ayat-section,
-  .info-section,
-  .closing-section,
-  .gallery-section,
-  .comments-section {
-    width: 95%; /* Lebih lebar di mobile */
-    padding: 20px 20px;
-    border-radius: 30px; /* Sedikit kurang bulat */
-  }
-
-  .card-ayat p,
-  .penutup p,
-  .comments-section p {
-    font-size: 0.85rem;
-  }
-
-  .card-ayat h5,
-  .penutup h5 {
-    font-size: 1.1rem;
-  }
-
-  .pembuka h3 {
-    font-size: 1.1rem;
-  }
-
-  .nama h2 {
-    font-size: 2rem; /* Ukuran nama pengantin di mobile */
-  }
-
-  .nama .ampersand {
-    font-size: 3.5rem;
-  }
-
   .acara {
-    grid-template-columns: 1fr; /* Satu kolom untuk mobile */
-    gap: 15px; /* Jarak antar bagian acara */
+    flex-direction: column;
   }
-
-  .acara h4 {
-    font-size: 1rem;
+  #comments-list {
+    padding: 0 1em;
   }
-
-  .acara p {
-    font-size: 0.85rem;
-  }
-
-  .acara .map {
-    padding: 7px 12px;
-    font-size: 0.85rem;
-  }
-
-  .galeri h2,
-  .comments-section h2 {
-    font-size: 1.6rem;
-  }
-
-  .galeri-container {
-    grid-template-columns: 1fr; /* Satu kolom untuk galeri di mobile */
-  }
-
-  .galeri-container .foto {
-    height: auto; /* Biarkan tinggi menyesuaikan rasio aspek */
-  }
-
-  .comments-section {
-    padding: 40px 15px;
-  }
-
-  .comments-section h2 {
-    font-size: 1.8rem;
-  }
-
-  .comments-section h3 {
-    font-size: 1.4rem;
-  }
-
-  .google-form-container iframe {
-    min-height: 400px; /* Tinggi minimum iframe di mobile */
-  }
-
-  .comment-author {
-    font-size: 1.1rem;
-  }
-
-  .comment-text {
-    font-size: 0.9rem;
-  }
-
-  .comment-date {
-    font-size: 0.75rem;
-  }
-}
-
-/* For screens smaller than 480px (very small mobile) */
-@media (max-width: 480px) {
-  .hero-container h1 {
-    font-size: 3rem;
-  }
-
-  .hero-container p {
-    font-size: 0.75rem;
-    padding: 0 15px 1rem;
-  }
-
-  .hero-container h4 {
-    font-size: 0.9rem;
-  }
-
-  .card-ayat,
-  .konten,
-  .penutup,
-  .galeri,
-  .comments-section {
-    padding: 15px 15px;
-    border-radius: 20px;
-  }
-
-  .nama h2 {
-    font-size: 2rem; /* Mengurangi ukuran font lebih lanjut */
-    line-height: 1.1; /* Mengurangi line-height sedikit */
-  }
-
-  .nama .ampersand {
-    font-size: 3rem;
-  }
-
-  .galeri-container .foto {
-    height: auto; /* Biarkan tinggi menyesuaikan rasio aspek */
-  }
-
-  .comments-section h2 {
-    font-size: 1.6rem;
-  }
-
-  .comments-section h3 {
-    font-size: 1.2rem;
-  }
-
-  .google-form-container iframe {
-    min-height: 350px; /* Tinggi minimum iframe di mobile kecil */
+  footer {
+    font-size: smaller;
   }
 }
