@@ -153,7 +153,7 @@
           <button type="submit">Kirim</button>
         </form>
 
-        <h3>Daftar Ucapan</h3>
+        <h3>Ucapan yang Masuk</h3>
         <div id="comments-list">
           <!-- Komentar akan ditampilkan di sini -->
         </div>
@@ -175,7 +175,7 @@
     <!-- Script untuk Komentar via Google Sheets -->
     <script>
       const scriptURL =
-        "https://script.google.com/macros/s/AKfycbwLgsretbK89b0TgZClxzE_yZt3fDotsETj75-KFbdXjAmD1X5I9zgKyDmM41v5wAv3/exec";
+        "https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec";
       const form = document.getElementById("comment-form");
       const list = document.getElementById("comments-list");
 
@@ -194,16 +194,18 @@
 
       async function loadComments() {
         const sheetURL =
-          "https://docs.google.com/spreadsheets/d/1Uq4q7ry5nETqQkVcDUx_hAUO21fj5K1VKNvhHodmYC8/gviz/tq?tqx=out:json";
+          "https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID/gviz/tq?tqx=out:json";
         const res = await fetch(sheetURL);
         const text = await res.text();
         const json = JSON.parse(text.substring(47).slice(0, -2));
 
         list.innerHTML = "";
         json.table.rows.reverse().forEach((row) => {
-          const nama = row.c[0]?.v || "Anonim";
-          const komentar = row.c[1]?.v || "";
-          const tanggal = row.c[2]?.v || "";
+          if (!row.c[0] || !row.c[1] || !row.c[2]) return;
+
+          const nama = row.c[0].v;
+          const komentar = row.c[1].v;
+          const tanggal = row.c[2].v;
           const el = document.createElement("div");
           el.className = "single-comment";
           el.innerHTML = `
