@@ -40,6 +40,16 @@ body::before {
   z-index: -1;
 }
 
+body.locked {
+  overflow: hidden;
+  height: 100vh;
+}
+
+body:not(.locked) .hero {
+  min-height: 100vh;
+  height: auto;
+}
+
 h1,
 h2,
 h3,
@@ -329,38 +339,21 @@ section {
   text-align: center;
 }
 
-/* ===== Footer ===== */
-footer {
-  background-color: var(--primary-color);
-  color: var(--white);
-  padding: 1.5em;
-  text-align: center;
-}
-
-footer a {
-  color: #f5f5f5;
-  text-decoration: underline;
-  transition: color 0.3s ease;
-}
-
-footer a:hover {
-  color: #fff;
-  text-decoration: none;
-}
-
+/* ===== Scroll Indicator ===== */
 .scroll-indicator {
   position: fixed;
   bottom: 20px;
-  left: 50%;
+  right: 0;
   transform: translateX(-50%);
   color: white;
-  font-size: 1.2rem;
+  font-size: 0.9rem;
   z-index: 10;
   display: none;
   background-color: rgba(0, 0, 0, 0.5);
   padding: 8px 16px;
   border-radius: 20px;
   transition: all 0.3s ease;
+  cursor: pointer;
 }
 
 .scroll-indicator.up {
@@ -423,6 +416,39 @@ footer a:hover {
   animation: bounce-up 2s infinite;
 }
 
+/* ===== Audio Loading ===== */
+.audio-loading {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  z-index: 100;
+}
+
+/* ===== Footer ===== */
+footer {
+  background-color: var(--primary-color);
+  color: var(--white);
+  padding: 1.5em;
+  text-align: center;
+}
+
+footer a {
+  color: #f5f5f5;
+  text-decoration: underline;
+  transition: color 0.3s ease;
+}
+
+footer a:hover {
+  color: #fff;
+  text-decoration: none;
+}
+
 /* ===== Responsiveness ===== */
 @media (max-width: 768px) {
   .acara {
@@ -458,5 +484,10 @@ footer a:hover {
 
   .acara article {
     min-width: 280px;
+  }
+
+  .scroll-indicator {
+    font-size: 1rem;
+    padding: 6px 12px;
   }
 }

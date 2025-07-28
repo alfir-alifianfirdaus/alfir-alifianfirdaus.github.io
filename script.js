@@ -1,221 +1,308 @@
-// Ganti dengan URL CSV yang Anda dapatkan dari Google Sheet yang dipublikasikan.
-// URL ini harus diawali dengan "https://docs.google.com/spreadsheets/d/e/..."
-const GOOGLE_SHEET_CSV_URL =
-  "https://docs.google.com/spreadsheets/d/e/2PACX-1vTrVdxv0wI4tNSH7a73oj3A5ci2s92w16ibsdwaSisCXBOFc109mh7g8AU_9COWqBD7Rh29TnpIRWI9/pub?gid=1329532146&single=true&output=csv";
+// DOM Elements
+const body = document.body;
+const audio = document.getElementById("weddingAudio");
+const openBtn = document.querySelector(".hero .btn");
+const scrollIndicator = document.getElementById("scrollIndicator");
+const indicatorText = document.getElementById("indicatorText");
+const externalLinks = document.querySelectorAll('a[target="_blank"]');
+const commentForm = document.getElementById("comment-form");
+const commentsList = document.getElementById("comments-list");
+const audioLoading = document.getElementById("audioLoading");
 
+// State variables
+let isAudioPlaying = false;
+let lastScrollPosition = 0;
+
+// Initialize
 document.addEventListener("DOMContentLoaded", function () {
-  const openBtn = document.getElementById("open-invitation-btn");
-  const bgMusic = document.getElementById("background-music");
-  const htmlElement = document.documentElement; // Mengacu pada tag <html>
-  let isMusicPlayingInitiated = false; // Flag untuk melacak apakah musik pernah diputar oleh pengguna
-
-  // Ambil elemen daftar komentar
-  const commentsList = document.getElementById("comments-list");
-
-  // --- KODE BARU: Cek status pembukaan undangan di localStorage ---
-  const hasOpenedInvitation = localStorage.getItem("hasOpenedInvitation");
-
-  if (hasOpenedInvitation === "true") {
-    // Jika sudah pernah dibuka (ditandai di localStorage), langsung aktifkan scroll dan AOS
-    htmlElement.style.overflow = "auto";
-    if (bgMusic) {
-      // Coba putar musik, tapi tidak wajib berhasil karena browser mungkin memblokir auto-play
-      bgMusic.play().catch((e) => console.log("Music auto-play prevented:", e));
-      isMusicPlayingInitiated = true;
-    }
-    // Sembunyikan tombol "Buka Undangan" jika Anda tidak ingin terlihat lagi
-    // Opsi: Anda bisa menghapus elemen hero section seluruhnya untuk pengalaman yang lebih mulus
-    if (openBtn) {
-      openBtn.style.display = "none";
-      // Jika Anda ingin menyembunyikan seluruh hero section:
-      // document.getElementById('hero').style.display = 'none';
-      // customSmoothScroll("main-content", 0); // Langsung lompat ke konten utama
-    }
-    // Inisialisasi AOS karena halaman sudah "terbuka"
-    AOS.init({
-      duration: 1000,
-      once: true,
-    });
-    // Jika Anda ingin halaman langsung berada di bagian konten utama saat refresh
-    // customSmoothScroll("main-content", 10); // Durasi sangat singkat untuk efek instan
-  }
-  // --- AKHIR KODE BARU ---
-
-  // Fungsi untuk melakukan smooth scroll secara kustom
-  function customSmoothScroll(targetId, duration) {
-    const targetElement = document.getElementById(targetId);
-    if (!targetElement) return;
-
-    const startPosition = window.pageYOffset;
-    const targetPosition =
-      targetElement.getBoundingClientRect().top + window.pageYOffset;
-    const distance = targetPosition - startPosition;
-    let startTime = null;
-
-    function animation(currentTime) {
-      if (startTime === null) startTime = currentTime;
-      const timeElapsed = currentTime - startTime;
-      const run = easeInOutQuad(timeElapsed, startPosition, distance, duration);
-      window.scrollTo(0, run);
-      if (timeElapsed < duration) requestAnimationFrame(animation);
-    }
-
-    // Fungsi easing (membuat animasi lebih halus dari linear)
-    function easeInOutQuad(t, b, c, d) {
-      t /= d / 2;
-      if (t < 1) return (c / 2) * t * t + b;
-      t--;
-      return (-c / 2) * (t * (t - 2) - 1) + b;
-    }
-
-    requestAnimationFrame(animation);
+  // Check if invitation was previously opened
+  if (localStorage.getItem("invitationOpened")) {
+    body.classList.remove("locked");
+    scrollIndicator.style.display = "block";
   }
 
-  // Fungsi yang dipanggil saat tombol "Buka Undangan" diklik
-  function activateContentAndScroll() {
-    htmlElement.style.overflow = "auto"; // Mengaktifkan scroll
-    if (bgMusic) {
-      bgMusic
-        .play()
-        .then(() => {
-          isMusicPlayingInitiated = true; // Musik berhasil diputar
-        })
-        .catch((e) => console.error("Error playing music:", e));
-    }
-    openBtn.removeEventListener("click", activateContentAndScroll);
+  // Restore scroll position if coming back from external link
+  restoreScrollPosition();
 
-    // --- KODE BARU: Tandai bahwa undangan sudah dibuka di localStorage ---
-    localStorage.setItem("hasOpenedInvitation", "true");
-    // --- AKHIR KODE BARU ---
+  // Setup event listeners
+  setupEventListeners();
+});
 
-    // Panggil custom smooth scroll
-    customSmoothScroll("main-content", 1500); // 1500ms = 1.5 detik
-
-    AOS.init({
-      duration: 1000,
-      once: true,
-    });
-  }
-
-  // Tambahkan event listener ke tombol "Buka Undangan"
-  // Pastikan event listener hanya ditambahkan jika tombol ada dan belum pernah dibuka
-  if (openBtn && hasOpenedInvitation !== "true") {
-    openBtn.addEventListener("click", function (event) {
-      event.preventDefault();
-      activateContentAndScroll(); // Panggil fungsi baru ini
-    });
-  } else if (openBtn) {
-    // Jika undangan sudah dibuka tapi tombol masih ada (misal tidak disembunyikan total)
-    // Kita tetap bisa menghapus event listener jika ingin mencegah klik berulang
-    // openBtn.removeEventListener("click", activateContentAndScroll);
-  }
-
-  // --- Bagian Mengelola Musik berdasarkan Visibilitas Tab ---
-  document.addEventListener("visibilitychange", function () {
-    if (bgMusic && isMusicPlayingInitiated) {
-      if (document.hidden) {
-        bgMusic.pause();
-      } else {
-        bgMusic.play().catch((e) => console.error("Error resuming music:", e));
-      }
-    }
+// Event Listeners Setup
+function setupEventListeners() {
+  // Open invitation button
+  openBtn.addEventListener("click", function (e) {
+    e.preventDefault();
+    openInvitation();
   });
 
-  // --- Bagian untuk Menghentikan Musik saat Link Eksternal Diklik ---
-  const externalLinks = document.querySelectorAll('a[target="_blank"]');
-
+  // External links (maps, instagram)
   externalLinks.forEach((link) => {
     link.addEventListener("click", function () {
-      if (bgMusic && !bgMusic.paused) {
-        bgMusic.pause();
+      saveScrollPosition();
+      if (isAudioPlaying) {
+        audio.pause();
       }
     });
   });
 
-  // --- KODE UNTUK MEMUAT KOMENTAR DARI GOOGLE SHEET ---
-  async function loadCommentsFromSheet() {
-    try {
-      const response = await fetch(GOOGLE_SHEET_CSV_URL);
-      const csvText = await response.text();
-
-      // Memecah CSV menjadi baris dan memfilter baris kosong
-      const rows = csvText.split("\n").filter((row) => row.trim() !== "");
-
-      commentsList.innerHTML = ""; // Kosongkan daftar komentar sebelum memuat ulang
-
-      if (rows.length <= 1) {
-        // Jika hanya ada header atau tidak ada data
-        commentsList.innerHTML =
-          '<p style="text-align: center; margin-top: 20px; color: var(--warna4);">Belum ada ucapan dan doa. Jadilah yang pertama!</p>';
-        return;
+  // Visibility change (when returning to tab)
+  document.addEventListener("visibilitychange", function () {
+    if (!document.hidden) {
+      restoreScrollPosition();
+      if (isAudioPlaying && audio.paused) {
+        audio.play().catch((e) => console.log("Audio resume error:", e));
       }
-
-      // Asumsi baris pertama adalah header: Timestamp, Nama Anda, Ucapan & Doa
-      // Kita abaikan header dan mulai dari baris kedua
-      // Menggunakan regex untuk memecah CSV dengan benar, termasuk koma dalam tanda kutip
-      const commentData = rows
-        .slice(1)
-        .map((row, index) => {
-          const columns = row.match(/(".*?"|[^",]+)(?=\s*,|\s*$)/g);
-
-          // Tambahkan console log untuk melihat raw data dan kolom yang diparsing
-          // console.log(`Row ${index + 1} raw:`, row);
-          // console.log(`Row ${index + 1} columns:`, columns);
-
-          if (!columns || columns.length < 3) {
-            // Pastikan ada minimal 3 kolom (Timestamp, Nama, Ucapan)
-            console.warn(
-              `Baris ${index + 1} tidak valid atau kurang kolom:`,
-              row
-            );
-            return null; // Abaikan baris ini
-          }
-
-          return {
-            timestamp: columns[0] ? columns[0].replace(/"/g, "").trim() : "",
-            name: columns[1] ? columns[1].replace(/"/g, "").trim() : "Anonim", // Default jika nama kosong
-            comment: columns[2] ? columns[2].replace(/"/g, "").trim() : "",
-          };
-        })
-        .filter((comment) => comment !== null); // Filter baris yang diabaikan
-
-      if (commentData.length === 0) {
-        commentsList.innerHTML =
-          '<p style="text-align: center; margin-top: 20px; color: var(--warna4);">Belum ada ucapan dan doa. Jadilah yang pertama!</p>';
-        return;
-      }
-
-      // Tampilkan komentar terbaru di atas (reverse())
-      commentData.reverse().forEach((comment) => {
-        const commentDiv = document.createElement("div");
-        commentDiv.classList.add("single-comment");
-
-        // Perbaiki penanganan tanggal: pastikan tanggal valid
-        let formattedDate = "Invalid Date";
-        const dateObj = new Date(comment.timestamp);
-        if (!isNaN(dateObj)) {
-          // Periksa apakah dateObj adalah tanggal yang valid
-          formattedDate = dateObj.toLocaleString("id-ID", {
-            dateStyle: "medium",
-            timeStyle: "short",
-          });
-        } else {
-          console.warn("Timestamp tidak valid:", comment.timestamp);
-        }
-
-        commentDiv.innerHTML = `
-                        <p class="comment-author"><strong>${comment.name}</strong></p>
-                        <p class="comment-text">${comment.comment}</p>
-                        <p class="comment-date">${formattedDate}</p>
-                    `;
-        commentsList.appendChild(commentDiv);
-      });
-    } catch (error) {
-      console.error("Error loading comments from Google Sheet:", error);
-      commentsList.innerHTML =
-        '<p style="text-align: center; margin-top: 20px; color: red;">Gagal memuat komentar. Pastikan URL Google Sheet CSV benar dan dipublikasikan. (Lihat console log untuk detail)</p>';
     }
+  });
+
+  // Scroll events
+  window.addEventListener("scroll", function () {
+    // Prevent scrolling if locked
+    if (body.classList.contains("locked")) {
+      window.scrollTo(0, 0);
+      return;
+    }
+
+    // Check scroll position for indicator
+    checkScrollPosition();
+
+    // Adjust audio volume based on scroll direction
+    adjustAudioVolume();
+  });
+
+  // Audio events
+  audio.addEventListener("waiting", () => {
+    audioLoading.style.display = "block";
+  });
+
+  audio.addEventListener("canplay", () => {
+    audioLoading.style.display = "none";
+  });
+
+  // Form submission
+  commentForm.addEventListener("submit", handleCommentSubmit);
+}
+
+// Open invitation function
+function openInvitation() {
+  // Unlock scroll
+  body.classList.remove("locked");
+  localStorage.setItem("invitationOpened", "true");
+
+  // Show scroll indicator
+  scrollIndicator.style.display = "block";
+  checkScrollPosition();
+
+  // Start audio with low volume
+  audio.volume = 0.3;
+  audio
+    .play()
+    .then(() => {
+      isAudioPlaying = true;
+    })
+    .catch((error) => {
+      console.log("Audio play failed:", error);
+      // Fallback: continue without audio
+      smoothScrollToMain();
+    });
+
+  // Smooth scroll to main
+  smoothScrollToMain();
+}
+
+// Smooth scroll animation
+function smoothScrollToMain() {
+  const mainSection = document.getElementById("main");
+  const targetPosition = mainSection.offsetTop;
+  const startPosition = window.pageYOffset;
+  const distance = targetPosition - startPosition;
+  const duration = 3000;
+  let startTime = null;
+
+  function animation(currentTime) {
+    if (startTime === null) startTime = currentTime;
+    const timeElapsed = currentTime - startTime;
+    const run = easeInOutQuad(timeElapsed, startPosition, distance, duration);
+    window.scrollTo(0, run);
+    if (timeElapsed < duration) requestAnimationFrame(animation);
   }
 
-  loadCommentsFromSheet();
-});
+  requestAnimationFrame(animation);
+}
+
+// Easing function for smooth scroll
+function easeInOutQuad(t, b, c, d) {
+  t /= d / 2;
+  if (t < 1) return (c / 2) * t * t + b;
+  t--;
+  return (-c / 2) * (t * (t - 2) - 1) + b;
+}
+
+// Check scroll position for indicator
+function checkScrollPosition() {
+  const scrollPosition = window.scrollY + window.innerHeight;
+  const pageHeight = document.documentElement.scrollHeight;
+  const isAtBottom = scrollPosition >= pageHeight - 50;
+
+  if (isAtBottom) {
+    scrollIndicator.classList.remove("down");
+    scrollIndicator.classList.add("up");
+    indicatorText.textContent = "Kembali";
+
+    scrollIndicator.onclick = function () {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    };
+  } else {
+    scrollIndicator.classList.remove("up");
+    scrollIndicator.classList.add("down");
+    indicatorText.textContent = "Scroll";
+
+    scrollIndicator.onclick = function () {
+      window.scrollBy({
+        top: window.innerHeight * 0.8,
+        behavior: "smooth",
+      });
+    };
+  }
+}
+
+// Adjust audio volume based on scroll direction
+function adjustAudioVolume() {
+  const currentPosition = window.scrollY;
+
+  if (currentPosition > lastScrollPosition) {
+    // Scrolling down - increase volume
+    if (audio.volume < 0.7) audio.volume += 0.005;
+  } else {
+    // Scrolling up - decrease volume
+    if (audio.volume > 0.3) audio.volume -= 0.005;
+  }
+
+  lastScrollPosition = currentPosition;
+}
+
+// Save scroll position before leaving
+function saveScrollPosition() {
+  sessionStorage.setItem("lastScrollPosition", window.scrollY);
+}
+
+// Restore scroll position when returning
+function restoreScrollPosition() {
+  const savedPosition = sessionStorage.getItem("lastScrollPosition");
+  if (savedPosition && savedPosition > 0) {
+    // Show temporary loader
+    body.style.opacity = "0.5";
+
+    setTimeout(() => {
+      window.scrollTo({
+        top: savedPosition,
+        behavior: "instant",
+      });
+      sessionStorage.removeItem("lastScrollPosition");
+      body.style.opacity = "1";
+    }, 100);
+  }
+}
+
+// Handle comment submission
+function handleCommentSubmit(e) {
+  e.preventDefault();
+  const submitBtn = commentForm.querySelector("button");
+  const originalText = submitBtn.textContent;
+
+  // Show loading state
+  submitBtn.disabled = true;
+  submitBtn.textContent = "Mengirim...";
+
+  const scriptURL =
+    "https://script.google.com/macros/s/AKfycbwLgsretbK89b0TgZClxzE_yZt3fDotsETj75-KFbdXjAmD1X5I9zgKyDmM41v5wAv3/exec";
+  const formData = new FormData(commentForm);
+
+  fetch(scriptURL, {
+    method: "POST",
+    body: formData,
+  })
+    .then((response) => {
+      if (!response.ok) throw new Error("Network response was not ok");
+      return response;
+    })
+    .then(() => {
+      alert("Terima kasih atas ucapan Anda!");
+      commentForm.reset();
+      loadComments();
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+      alert("Gagal mengirim ucapan. Silakan coba lagi nanti.");
+    })
+    .finally(() => {
+      submitBtn.disabled = false;
+      submitBtn.textContent = originalText;
+    });
+}
+
+// Load comments from Google Sheets
+async function loadComments() {
+  try {
+    const sheetURL =
+      "https://docs.google.com/spreadsheets/d/1Uq4q7ry5nETqQkVcDUx_hAUO21fj5K1VKNvhHodmYC8/gviz/tq?tqx=out:json";
+    const res = await fetch(sheetURL);
+    if (!res.ok) throw new Error("Failed to fetch comments");
+
+    const text = await res.text();
+    const json = JSON.parse(text.substring(47).slice(0, -2));
+
+    commentsList.innerHTML = "";
+
+    json.table.rows.reverse().forEach((row) => {
+      const nama = row.c[0]?.v;
+      const komentar = row.c[1]?.v;
+      const tanggal = row.c[2]?.v;
+
+      if (!nama || !komentar || !tanggal) return;
+      if (
+        nama.toLowerCase() === "nama" ||
+        komentar.toLowerCase() === "komentar"
+      )
+        return;
+
+      // Format date
+      let formattedDate;
+      try {
+        const dateObj = new Date(tanggal);
+        if (isNaN(dateObj.getTime())) {
+          formattedDate = tanggal;
+        } else {
+          formattedDate = dateObj.toLocaleDateString("id-ID", {
+            day: "numeric",
+            month: "long",
+            year: "numeric",
+            hour: "2-digit",
+            minute: "2-digit",
+          });
+        }
+      } catch (e) {
+        formattedDate = tanggal;
+      }
+
+      const commentEl = document.createElement("div");
+      commentEl.className = "single-comment";
+      commentEl.innerHTML = `
+        <div class="comment-author">${nama}</div>
+        <div class="comment-text">${komentar}</div>
+        <div class="comment-date">${formattedDate}</div>
+      `;
+      commentsList.appendChild(commentEl);
+    });
+  } catch (error) {
+    console.error("Error loading comments:", error);
+    commentsList.innerHTML = `<p class="error-message">Gagal memuat komentar. Silakan refresh halaman.</p>`;
+  }
+}
+
+// Initial load of comments
+loadComments();
