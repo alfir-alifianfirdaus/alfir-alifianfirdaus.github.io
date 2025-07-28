@@ -467,8 +467,8 @@ footer a:hover {
   .foto {
     height: 200px;
   }
-  footer{
-    font-size: smaller
+  footer {
+    font-size: smaller;
   }
 }
 
@@ -492,5 +492,8 @@ footer a:hover {
   .scroll-indicator {
     font-size: 1rem;
     padding: 6px 12px;
+  }
+  footer {
+    font-size: smaller;
   }
 }
