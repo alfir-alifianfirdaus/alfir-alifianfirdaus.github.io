@@ -252,11 +252,13 @@ section {
 
 .comment-text {
   margin: 0.5em 0;
+  text-align: end;
 }
 
 .comment-date {
   font-size: 0.85rem;
   color: #777;
+  text-align: end;
 }
 
 /* ===== Footer ===== */
